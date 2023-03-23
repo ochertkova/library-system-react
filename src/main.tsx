@@ -10,17 +10,17 @@ import { store } from './redux/store'
 const theme = createTheme({
   palette: {
     primary: {
-      main:"#006d77"
+      main: '#006d77'
     }
   }
 })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme ={theme}>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
         <App />
-      </ThemeProvider>
-    </Provider>
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 )

@@ -1,6 +1,10 @@
+type User = {
+  id: number
+  name: string
+  isAdmin: boolean
+}
 
-
-
-type Test = {
-    name: string
+type UserState = {
+  user?: User
+  isAuthenticated: boolean
 }
