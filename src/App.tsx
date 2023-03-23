@@ -4,17 +4,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { handleDecrement, handleIncrement } from './redux/actions/counter'
 import './App.css'
+import Header from './components/Header/Header'
 
 function App() {
   const dispatch = useDispatch()
   const count = useSelector((state: RootState) => state.count)
 
   return (
-    <div className="App">
-      <h1>Vite + React + Vanilla Redux + Tailwind</h1>
+    <Grid container direction="column">
+      <Grid item container>
+      <Header />
+      </Grid>
+      <Grid item container>
+        <Grid item xs={0} sm={1} />
+        <Grid item xs={12} sm={10}>
+          Content
+          </Grid>
+        <Grid item xs={0} sm={1} />
 
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        
+      </Grid>
+      <Grid item container>
           <Grid item xs={5}>
             <Button variant="contained" onClick={() => dispatch(handleIncrement())}>
               Increment
@@ -27,10 +37,9 @@ function App() {
             <Button variant="contained" onClick={() => dispatch(handleDecrement())}>
               Decrement
             </Button>
-          </Grid>
+            </Grid>
         </Grid>
-      </Box>
-    </div>
+</Grid>
   )
 }
 
