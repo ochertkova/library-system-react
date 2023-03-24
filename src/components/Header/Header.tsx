@@ -82,7 +82,7 @@ const Header = () => {
   const pages = getPages(userState)
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar>
+      <AppBar position="static">
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
