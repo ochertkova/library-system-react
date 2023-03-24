@@ -9,7 +9,13 @@ type UserState = {
   isAuthenticated: boolean
 }
 
+type ViewState = {
+  activeView: string
+  parameters: object
+}
+
 type Book = {
+  id: number
   cover: string
   ISBN: number
   title: string

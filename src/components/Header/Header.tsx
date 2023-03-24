@@ -19,8 +19,9 @@ import { styled, makeStyles } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import ButtonLink from '../ButtonLink/ButtonLink'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import { openView } from '../../redux/actions/view'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,10 +69,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 const getPages = ({ isAuthenticated }: UserState) =>
-  isAuthenticated ? ['Catalog', 'My Loans', 'My Requests'] : ['Catalog']
+  isAuthenticated
+    ? [
+        {
+          label: 'Catalog',
+          viewName: 'catalog'
+        },
+        {
+          label: 'My Loans',
+          viewName: 'loans'
+        },
+        {
+          label: 'My Requests',
+          viewName: 'requests'
+        }
+      ]
+    : [
+        {
+          label: 'Catalog',
+          viewName: 'catalog'
+        }
+      ]
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+  const dispatch = useDispatch()
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -80,9 +103,10 @@ const Header = () => {
   }
   const userState = useSelector((state: RootState) => state.user)
   const pages = getPages(userState)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -112,8 +136,13 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' }
               }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.label}
+                  onClick={() => {
+                    handleCloseNavMenu()
+                    dispatch(openView(page.viewName))
+                  }}>
+                  <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -128,10 +157,13 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.label}
+                onClick={() => {
+                  handleCloseNavMenu()
+                  dispatch(openView(page.viewName))
+                }}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page}
+                {page.label}
               </Button>
             ))}
           </Box>

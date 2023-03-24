@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -13,6 +14,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 2,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -26,6 +28,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 3,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -39,6 +42,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 4,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -52,6 +56,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 5,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -65,6 +70,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 6,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -78,6 +84,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 7,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -91,6 +98,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 8,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -104,6 +112,21 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 9,
+    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "ISBN": 9780747532743,
+    "title": "Harry Potter and the Goblet of Fire",
+    "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
+    "publisher": "London: Bloomsbury Pub Ltd",
+    "authors": "J. K. Rowling",
+    "status": "available",
+    "borrowerId": 1,
+    "publishedDate": "February 2000",
+    "borrowDate": "01/03/2023 1:35:20 PM",
+    "returnDate": "24/03/2023 1:35:20 PM"
+  },
+  {
+    "id": 10,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -117,6 +140,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 11,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -130,6 +154,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 12,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -143,6 +168,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
+    "id": 13,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
@@ -156,19 +182,7 @@
     "returnDate": "24/03/2023 1:35:20 PM"
   },
   {
-    "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
-    "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
-    "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
-    "publisher": "London: Bloomsbury Pub Ltd",
-    "authors": "J. K. Rowling",
-    "status": "available",
-    "borrowerId": 1,
-    "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
-  },
-  {
+    "id": 14,
     "cover": "../../../public/images/harry-potter-cover.jpg",
     "ISBN": 9780747532743,
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",

@@ -14,8 +14,14 @@ import {
 } from '@mui/material'
 
 import bookData from '../../../public/data/books.json'
+import { useDispatch } from 'react-redux'
+import { openBook } from '../../redux/actions/view'
 
 const books = bookData
+
+const handleBookInfo = () => {
+  return <BookInfo />
+}
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -39,6 +45,8 @@ export default function ContentTable() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
+  const dispatch = useDispatch()
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
   }
@@ -49,8 +57,8 @@ export default function ContentTable() {
   }
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer>
+    <Paper sx={{ width: '100%', overflow: 'auto' }}>
+      <TableContainer component={Paper}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -67,7 +75,12 @@ export default function ContentTable() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.ISBN}>
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.ISBN}
+                  onClick={() => dispatch(openBook(row.id))}>
                   {columns.map((column) => {
                     const value = row[column.id]
                     if (column.id === 'cover') {
