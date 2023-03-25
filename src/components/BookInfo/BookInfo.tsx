@@ -1,40 +1,101 @@
-import { Box, Grid } from '@mui/material'
-import { useSelector } from 'react-redux'
-import bookData from '../../../public/data/books.json'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import { handleBorrow } from '../../redux/actions/book'
 
-const books = bookData
+function getFunctions(userState: UserState, book: Book) {
+  const dispatch = useDispatch()
+  const { isAuthenticated, user } = userState
+  if (!isAuthenticated) return () => <></>
+
+  if (user?.isAdmin) {
+    return () => (
+      <>
+        {book.status === 'borrowed' && (
+          <>
+            <Box>
+              <>Borrowed: {book?.borrowDate.toDateString()}</>
+            </Box>
+            <Box>
+              <>Borrower: {book?.borrowerId}</>
+            </Box>
+            <Box>
+              <>Return by date: {book?.returnDate.toDateString()}</>
+            </Box>
+          </>
+        )}
+        <Button onClick={() => alert('moi')}>Test</Button>
+      </>
+    )
+  }
+  return () => (
+    <>
+      <Button onClick={() => dispatch(handleBorrow(user.id, book.id))}>Borrow</Button>
+    </>
+  )
+}
 
 const BookInfo = () => {
   const { id } = useSelector((state: RootState) => state.view.parameters)
+  const userState = useSelector((state: RootState) => state.user)
+  const booksState = useSelector((state: RootState) => state.books)
 
-  const book = books.find((b) => b.id === id)
+  const book = booksState.find((b) => b.id === id)
+
+  const ExtraFunctions = getFunctions(userState, book)
 
   return (
-    <Grid container direction="row" spacing={1}>
-      <Grid item xs={1} md={1}>
-        <Box>xs=6 md=8</Box>
-      </Grid>
-      {book?.title}
-      <Grid item xs={2} md={1}>
-        <Box>xs=6 md=4</Box>
-      </Grid>
-      <Grid item xs={7} md={8}>
-        <Box>
-          <Grid container direction="column">
-            <Grid item xs={6} md={6}>
-              <Box>{book?.title}</Box>
+    <Typography>
+      <Grid container direction="row" spacing={1}>
+        <Grid item xs={1} md={1}></Grid>
+        <Grid item xs={2} md={1}>
+          <Box
+            component="img"
+            sx={{
+              height: 150,
+              maxHeight: { xs: 100, md: 120 }
+            }}
+            alt="Book cover"
+            src={book?.cover}
+          />
+        </Grid>
+        <Grid item xs={7} md={8}>
+          <Box>
+            <Grid container direction="column" spacing={1}>
+              <Grid item xs={12} md={12}>
+                <Box>{book?.title}</Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Box>{book?.authors}</Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Box>ISBN:{book?.ISBN}</Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Box>
+                  <>
+                    Publisher:
+                    {book?.publisher}
+                    {book?.publishedDate.toDateString()}
+                  </>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Box>{book?.description}</Box>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Box>Status: {book?.status}</Box>
+              </Grid>
+
+              <Grid item xs={12} md={12}>
+                <ExtraFunctions />
+              </Grid>
             </Grid>
-            <Grid item xs={6} md={6}>
-              <Box>xs=6 md=8</Box>
-            </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={1} md={1}></Grid>
       </Grid>
-      <Grid item xs={1} md={1}>
-        <Box>xs=6 md=8</Box>
-      </Grid>
-    </Grid>
+    </Typography>
   )
 }
 

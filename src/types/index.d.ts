@@ -14,6 +14,8 @@ type ViewState = {
   parameters: object
 }
 
+type BooksState = Book[]
+
 type Book = {
   id: number
   cover: string
@@ -27,4 +29,19 @@ type Book = {
   publishedDate: Date
   borrowDate: Date
   returnDate: Date
+}
+
+type JsonBook = {
+  id: number
+  cover: string
+  ISBN: number
+  title: string
+  description: string
+  publisher: string
+  authors: string
+  status: string
+  borrowerId: number
+  publishedDate: string
+  borrowDate: string
+  returnDate: string
 }

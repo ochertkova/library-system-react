@@ -6,7 +6,7 @@ import { handleDecrement, handleIncrement } from './redux/actions/counter'
 import Header from './components/Header/Header'
 import { handleLogin, handleLogout } from './redux/actions/user'
 import ContentTable from './components/ContentTable/ContentTable'
-import BookInfo from './components/BookInfo/Bookinfo'
+import BookInfo from './components/BookInfo/BookInfo'
 
 function WelcomeScreen() {
   return <Typography>Welcome to Library System</Typography>
@@ -34,15 +34,14 @@ function App() {
     <>
       <Header />
       <Button onClick={() => dispatch(handleLogin(1))}>Log in</Button>
+      <Button onClick={() => dispatch(handleLogin(2))}>Log in a admin</Button>
+
       <Button onClick={() => dispatch(handleLogout())}>Log out</Button>
       <Content />
       <Grid container direction="column">
         <Grid item container direction="row"></Grid>
         <Grid item container>
           <Grid item xs={0} sm={1} />
-          <Grid item xs={12} sm={10}>
-            Content
-          </Grid>
           <Grid item xs={0} sm={1} />
         </Grid>
         <Grid item container>

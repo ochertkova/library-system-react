@@ -13,15 +13,9 @@ import {
   Toolbar
 } from '@mui/material'
 
-import bookData from '../../../public/data/books.json'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { openBook } from '../../redux/actions/view'
-
-const books = bookData
-
-const handleBookInfo = () => {
-  return <BookInfo />
-}
+import { RootState } from '../../redux/store'
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -39,13 +33,14 @@ const columns: readonly Column[] = [
   { id: 'status', label: 'Status', minWidth: 100 }
 ]
 
-const rows = bookData
-
 export default function ContentTable() {
+  const books = useSelector((state: RootState) => state.books)
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const dispatch = useDispatch()
+
+  const rows = books
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
