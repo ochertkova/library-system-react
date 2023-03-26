@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Box,
-  Checkbox,
   Paper,
   Table,
   TableBody,
@@ -9,13 +8,13 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
-  Toolbar
+  TableRow
 } from '@mui/material'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { openBook } from '../../redux/actions/view'
 import { RootState } from '../../redux/store'
+import Typography from '@mui/material/Typography'
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -34,7 +33,7 @@ const columns: readonly Column[] = [
 ]
 
 export default function ContentTable() {
-  const books = useSelector((state: RootState) => state.books)
+  const { isLoading, books } = useSelector((state: RootState) => state.books)
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
@@ -49,6 +48,10 @@ export default function ContentTable() {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value)
     setPage(0)
+  }
+
+  if (isLoading) {
+    return <Typography>Loading books....</Typography>
   }
 
   return (
@@ -68,7 +71,7 @@ export default function ContentTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: Book) => {
               return (
                 <TableRow
                   hover

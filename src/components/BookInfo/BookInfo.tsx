@@ -40,7 +40,7 @@ const BookInfo = () => {
   const userState = useSelector((state: RootState) => state.user)
   const booksState = useSelector((state: RootState) => state.books)
 
-  const book = booksState.find((b) => b.id === id)
+  const book = booksState.books.find((b: Book) => b.id === id)
 
   const ExtraFunctions = getFunctions(userState, book)
 

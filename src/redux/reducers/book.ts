@@ -1,38 +1,35 @@
-import { ADD, BORROW } from '../actions/book'
-import booksData from '../../../public/data/books.json'
+import { ADD, BORROW, FETCH_BOOKS_RESPONSE, FETCH_BOOKS_START } from '../actions/book'
 
-function bookStatus(status: string): 'available' | 'borrowed' {
-  return status === 'available' ? 'available' : 'borrowed'
-}
-
-function withStatus(book: JsonBook): Book {
-  return {
-    ...book,
-    status: bookStatus(book.status),
-    publishedDate: new Date(book.publishedDate),
-    borrowDate: new Date(book.borrowDate),
-    returnDate: new Date(book.returnDate)
-  }
-}
-
-const books: Book[] = booksData.map(withStatus)
-const initialState = books
+const initialState = { isLoading: false, books: [] }
 export default function bookReducer(state: BooksState = initialState, action: any) {
   switch (action.type) {
+    case FETCH_BOOKS_START:
+      return {
+        isLoading: true,
+        books: []
+      }
+    case FETCH_BOOKS_RESPONSE:
+      return {
+        isLoading: false,
+        books: action.payload
+      }
     case BORROW:
-      return books.map((book) => {
-        if (book.id === action.payload.bookId) {
-          const borrowedBook = {
-            ...book,
-            status: 'borrowed',
-            borrowerId: action.payload.userId,
-            borrowDate: new Date(),
-            returnDate: new Date()
+      return {
+        isLoading: false,
+        books: state.books.map((book) => {
+          if (book.id === action.payload.bookId) {
+            const borrowedBook = {
+              ...book,
+              status: 'borrowed',
+              borrowerId: action.payload.userId,
+              borrowDate: new Date(),
+              returnDate: new Date()
+            }
+            return borrowedBook
           }
-          return borrowedBook
-        }
-        return book
-      })
+          return book
+        })
+      }
     case ADD:
       return state
     default:

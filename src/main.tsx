@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material'
 
 import App from './App'
 import { store } from './redux/store'
+import { initBooks } from './redux/actions/book'
 
 const theme = createTheme({
   palette: {
@@ -13,6 +14,7 @@ const theme = createTheme({
     }
   }
 })
+store.dispatch(initBooks())
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

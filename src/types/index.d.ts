@@ -14,7 +14,10 @@ type ViewState = {
   parameters: object
 }
 
-type BooksState = Book[]
+type BooksState = {
+  isLoading: boolean
+  books: Book[]
+}
 
 type Book = {
   id: number
