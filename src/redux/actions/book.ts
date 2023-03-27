@@ -84,7 +84,6 @@ function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,
     status: bookStatus(book.status),
-    publishedDate: new Date(book.publishedDate),
     borrowDate: new Date(book.borrowDate),
     returnDate: new Date(book.returnDate)
   }

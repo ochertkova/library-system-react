@@ -2,7 +2,7 @@
   {
     "id": 1,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -15,36 +15,36 @@
   },
   {
     "id": 2,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "cover": "../../../public/images/prizoner-azkaban-cover.jpg",
+    "ISBN": "9780439136365",
     "title": "Harry Potter and the Prizoner of Azkaban",
-    "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
-    "publisher": "London: Bloomsbury Pub Ltd",
+    "description": "For twelve long years, the dread fortress of Azkaban held an infamous prisoner named Sirius Black. Convicted of killing thirteen people with a single curse, he was said to be the heir apparent to the Dark Lord, Voldemort.Now he has escaped, leaving only two clues as to where he might be headed: Harry Potter's defeat of You-Know-Who was Black's downfall as well. And the Azkaban guards heard Black muttering in his sleep, 'He's at Hogwarts . . . he's at Hogwarts.'Harry Potter isn't safe, not even within the walls of his magical school, surrounded by his friends. Because on top of it all, there may well be a traitor in their midst.",
+    "publisher": "Scholastic US, United States",
     "authors": "J. K. Rowling",
     "status": "borrowed",
-    "borrowerId": 1,
-    "publishedDate": "February 2000",
+    "borrowerId": 4,
+    "publishedDate": "2006",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "15/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 3,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
-    "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
-    "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
-    "publisher": "London: Bloomsbury Pub Ltd",
-    "authors": "J. K. Rowling",
+    "cover": "../../../public/images/fellowship-ring.jpg",
+    "ISBN": "9780007269709",
+    "title": "The Fellowship of the Ring: Being the First Part of the Lord of the Rings. ",
+    "description": "The first volume in J.R.R. Tolkien's epic adventure The Lord of the Rings One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell into the hands of Bilbo Baggins, as told in The Hobbit. In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task, as his elderly cousin Bilbo entrusts the Ring to his care. Frodo must leave his home and make a perilous journey across Middle-earth to the Cracks of Doom, there to destroy the Ring and foil the Dark Lord in his evil purpose.",
+    "publisher": "HarperCollins",
+    "authors": "J. R. R. Tolkien",
     "status": "available",
-    "borrowerId": 1,
-    "publishedDate": "February 2000",
+    "borrowerId": 5,
+    "publishedDate": "2008",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 4,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -53,12 +53,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 5,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -67,12 +67,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 6,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -81,12 +81,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 7,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -95,12 +95,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 8,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -109,12 +109,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/20231:35:20 PM"
   },
   {
     "id": 9,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Goblet of Fire",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -123,12 +123,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 10,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -137,12 +137,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 11,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -151,12 +151,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 12,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -165,12 +165,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 13,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -179,12 +179,12 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   },
   {
     "id": 14,
     "cover": "../../../public/images/harry-potter-cover.jpg",
-    "ISBN": 9780747532743,
+    "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
@@ -193,6 +193,6 @@
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "24/03/2023 1:35:20 PM"
+    "returnDate": "01/17/2023 1:35:20 PM"
   }
 ]

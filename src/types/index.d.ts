@@ -22,29 +22,29 @@ type BooksState = {
 type Book = {
   id: number
   cover: string
-  ISBN: number
+  ISBN: string
   title: string
   description: string
   publisher: string
   authors: string
   status: 'available' | 'borrowed'
-  borrowerId: number
-  publishedDate: Date
-  borrowDate: Date
-  returnDate: Date
+  borrowerId?: number
+  publishedDate: string
+  borrowDate?: Date
+  returnDate?: Date
 }
 
 type JsonBook = {
   id: number
   cover: string
-  ISBN: number
+  ISBN: string
   title: string
   description: string
   publisher: string
   authors: string
   status: string
-  borrowerId: number
+  borrowerId?: number
   publishedDate: string
-  borrowDate: string
-  returnDate: string
+  borrowDate?: string
+  returnDate?: string
 }

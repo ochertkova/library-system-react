@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { handleBorrow } from '../../redux/actions/book'
+import { handleBorrow, handleReturn } from '../../redux/actions/book'
 
 function getFunctions(userState: UserState, book: Book) {
   const dispatch = useDispatch()
@@ -30,7 +30,19 @@ function getFunctions(userState: UserState, book: Book) {
   }
   return () => (
     <>
-      <Button onClick={() => dispatch(handleBorrow(user.id, book.id))}>Borrow</Button>
+      {book.status === 'available' && (
+        <>
+          <Button onClick={() => dispatch(handleBorrow(user.id, book.id))}>Borrow</Button>
+        </>
+      )}
+
+      <>
+        {book.status === 'borrowed' && book.borrowerId === user?.id && (
+          <>
+            <Button onClick={() => dispatch(handleReturn(user.id, book.id))}>Return</Button>
+          </>
+        )}
+      </>
     </>
   )
 }
@@ -76,7 +88,7 @@ const BookInfo = () => {
                   <>
                     Publisher:
                     {book?.publisher}
-                    {book?.publishedDate.toDateString()}
+                    {book?.publishedDate}
                   </>
                 </Box>
               </Grid>

@@ -1,4 +1,4 @@
-import { ADD, BORROW, FETCH_BOOKS_RESPONSE, FETCH_BOOKS_START } from '../actions/book'
+import { ADD, BORROW, FETCH_BOOKS_RESPONSE, FETCH_BOOKS_START, RETURN } from '../actions/book'
 
 const initialState = { isLoading: false, books: [] }
 export default function bookReducer(state: BooksState = initialState, action: any) {
@@ -26,6 +26,23 @@ export default function bookReducer(state: BooksState = initialState, action: an
               returnDate: new Date()
             }
             return borrowedBook
+          }
+          return book
+        })
+      }
+    case RETURN:
+      return {
+        isLoading: false,
+        books: state.books.map((book) => {
+          if (book.id === action.payload.bookId) {
+            const returnedBook = {
+              ...book,
+              status: 'available',
+              borrowerId: null,
+              borrowDate: null,
+              returnDate: null
+            }
+            return returnedBook
           }
           return book
         })
