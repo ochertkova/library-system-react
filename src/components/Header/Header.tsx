@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   AppBar,
-  Grid,
   Typography,
   Toolbar,
   IconButton,
@@ -10,15 +9,13 @@ import {
   Box,
   MenuItem,
   Menu,
-  Button,
-  Badge
+  Button
 } from '@mui/material'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 
-import { styled, makeStyles } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import ButtonLink from '../ButtonLink/ButtonLink'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { openView } from '../../redux/actions/view'

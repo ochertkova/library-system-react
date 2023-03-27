@@ -53,7 +53,9 @@ export function fetchBooksResponse(books: JsonBook[]) {
 }
 
 export function initBooks() {
+  // action creator
   return (dispatch, getState) => {
+    //thunk function
     const { books } = getState()
     if (books.books.length === 0) {
       return dispatch(getAllBooks())
@@ -65,6 +67,7 @@ export function initBooks() {
 export const getAllBooks = () => {
   //action creator
   return async (dispatch, getState) => {
+    //thunk function
     dispatch(fetchBooksRequest()) // call action creator, start loading
     const response = await fetch('/data/books.json')
     const data = await response.json()
