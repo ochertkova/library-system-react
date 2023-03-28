@@ -1,4 +1,10 @@
-import { ADD, BORROW, FETCH_BOOKS_RESPONSE, FETCH_BOOKS_START, RETURN } from '../actions/book'
+import {
+  ADD_BOOK,
+  BORROW_BOOK,
+  FETCH_BOOKS_RESPONSE,
+  FETCH_BOOKS_START,
+  RETURN_BOOK
+} from '../actions/book'
 
 const initialState = { isLoading: false, books: [] }
 export default function bookReducer(state: BooksState = initialState, action: any) {
@@ -13,7 +19,7 @@ export default function bookReducer(state: BooksState = initialState, action: an
         isLoading: false,
         books: action.payload
       }
-    case BORROW:
+    case BORROW_BOOK:
       return {
         isLoading: false,
         books: state.books.map((book) => {
@@ -30,7 +36,7 @@ export default function bookReducer(state: BooksState = initialState, action: an
           return book
         })
       }
-    case RETURN:
+    case RETURN_BOOK:
       return {
         isLoading: false,
         books: state.books.map((book) => {
@@ -47,8 +53,11 @@ export default function bookReducer(state: BooksState = initialState, action: an
           return book
         })
       }
-    case ADD:
-      return state
+    case ADD_BOOK:
+      return {
+        isLoading: false,
+        books: [action.payload, ...state.books]
+      }
     default:
       return state
   }

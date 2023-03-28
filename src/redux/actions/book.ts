@@ -1,40 +1,52 @@
-export const BORROW = 'BORROW'
-export const RETURN = 'RETURN'
-export const ADD = 'ADD'
-export const UPDATE = 'UPDATE'
-export const REMOVE = 'REMOVE'
+import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
+import { RootState } from '../store'
+import { openView } from './view'
+
+export const BORROW_BOOK = 'BORROW_BOOK'
+export const RETURN_BOOK = 'RETURN_BOOK'
+export const ADD_BOOK = 'ADD_BOOK'
+export const UPDATE_BOOK = 'UPDATE_BOOK'
+export const REMOVE_BOOK = 'REMOVE_BOOK'
 export const FETCH_BOOKS_START = 'FETCH_BOOKS_START'
 export const FETCH_BOOKS_RESPONSE = 'FETCH_BOOKS_RESPONSE'
 
 export function handleBorrow(userId: number, bookId: number) {
   return {
-    type: BORROW,
+    type: BORROW_BOOK,
     payload: { userId, bookId }
   }
 }
 
 export function handleReturn(userId: number, bookId: number) {
   return {
-    type: RETURN,
+    type: RETURN_BOOK,
     payload: { userId, bookId }
   }
 }
 
-export function handleAdd(id: number) {
-  return {
-    type: ADD,
-    payload: { id }
+export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
+  return async (dispatch, getState: () => RootState) => {
+    //in the future id assignment to the book will be implemented on the server
+    dispatch(openView('catalog'))
+    //const id = await fetch('/api/books', { method: 'POST' }, book)
+    const books = getState().books.books
+    const id = books.slice(-1)[0].id + 1
+    return dispatch(handleAddComplete({ ...book, id, status: 'available' }))
   }
+}
+
+export function handleAddComplete(book: Book) {
+  return { type: ADD_BOOK, payload: book }
 }
 export function handleUpdate(id: number) {
   return {
-    type: UPDATE,
+    type: UPDATE_BOOK,
     payload: { id }
   }
 }
 export function handleRemove(id: number) {
   return {
-    type: REMOVE,
+    type: REMOVE_BOOK,
     payload: { id }
   }
 }

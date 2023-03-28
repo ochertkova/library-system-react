@@ -6,6 +6,8 @@ import Header from './components/Header/Header'
 import { handleLogin, handleLogout } from './redux/actions/user'
 import ContentTable from './components/ContentTable/ContentTable'
 import BookInfo from './components/BookInfo/BookInfo'
+import AddAuthor from './components/AddAuthor/AddAuthor'
+import AddBook from './components/AddBook/AddBook'
 
 function WelcomeScreen() {
   return <Typography>Welcome to Library System</Typography>
@@ -17,6 +19,10 @@ function getContentComponent(activeView: string) {
       return ContentTable
     case 'bookinfo':
       return BookInfo
+    case 'addAuthor':
+      return AddAuthor
+    case 'addBook':
+      return AddBook
     default:
       return WelcomeScreen
   }

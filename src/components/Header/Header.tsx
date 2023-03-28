@@ -62,25 +62,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }
 }))
 
-//const pages = ['Catalog', 'My Loans', 'My Requests']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
-
-const getPages = ({ isAuthenticated }: UserState) =>
+const getPages = ({ isAuthenticated, user }: UserState) =>
   isAuthenticated
-    ? [
-        {
-          label: 'Catalog',
-          viewName: 'catalog'
-        },
-        {
-          label: 'My Loans',
-          viewName: 'loans'
-        },
-        {
-          label: 'My Requests',
-          viewName: 'requests'
-        }
-      ]
+    ? user?.isAdmin
+      ? [
+          {
+            label: 'Catalog',
+            viewName: 'catalog'
+          },
+          {
+            label: 'Add Author',
+            viewName: 'addAuthor'
+          },
+          {
+            label: 'Add Book',
+            viewName: 'addBook'
+          }
+        ]
+      : [
+          {
+            label: 'Catalog',
+            viewName: 'catalog'
+          },
+          {
+            label: 'My Loans',
+            viewName: 'loans'
+          }
+        ]
     : [
         {
           label: 'Catalog',

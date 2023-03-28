@@ -21,7 +21,7 @@ type BooksState = {
 
 type Book = {
   id: number
-  cover: string
+  cover?: string
   ISBN: string
   title: string
   description: string
