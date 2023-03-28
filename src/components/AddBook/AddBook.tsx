@@ -1,11 +1,12 @@
-import { Typography, Box, TextField, Button, Stack, FormControl } from '@mui/material'
+import { Box, TextField, Button, Stack, FormControl } from '@mui/material'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import { handleAdd } from '../../redux/actions/book'
+import { AppDispatch } from '../../redux/store'
 
 const AddBook = () => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       ISBN: '',
@@ -28,12 +29,11 @@ const AddBook = () => {
       description: Yup.string().required('Description is required')
     })
   })
-  const { touched, errors } = formik
   return (
     <Stack spacing={2}>
       <Box>Add Book</Box>
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>
             <TextField
               id="ISBN"

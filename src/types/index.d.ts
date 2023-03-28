@@ -48,3 +48,12 @@ type JsonBook = {
   borrowDate?: string
   returnDate?: string
 }
+
+type BookAction =
+  | ReturnType<typeof fetchBooksResponse>
+  | ReturnType<typeof fetchBooksRequest>
+  | ReturnType<typeof handleRemove>
+  | ReturnType<typeof handleUpdate>
+  | ReturnType<typeof handleAdd>
+  | ReturnType<typeof handleReturn>
+  | ReturnType<typeof handleBorrow>

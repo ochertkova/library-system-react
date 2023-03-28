@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import userReducer from './reducers/user'
 import viewReducer from './reducers/view'
@@ -9,7 +9,11 @@ export const store = configureStore({
     user: userReducer,
     view: viewReducer,
     books: bookReducer
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

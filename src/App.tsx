@@ -40,7 +40,9 @@ function App() {
       <Button onClick={() => dispatch(handleLogin(1))}>Log in</Button>
       <Button onClick={() => dispatch(handleLogin(2))}>Log in a admin</Button>
       <Button onClick={() => dispatch(handleLogout())}>Log out</Button>
-      <Content />
+      <Typography component="span">
+        <Content />
+      </Typography>
     </>
   )
 }

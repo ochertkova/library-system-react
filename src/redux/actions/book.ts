@@ -1,5 +1,5 @@
 import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
-import { RootState } from '../store'
+import { AppDispatch, RootState } from '../store'
 import { openView } from './view'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
@@ -25,7 +25,7 @@ export function handleReturn(userId: number, bookId: number) {
 }
 
 export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
-  return async (dispatch, getState: () => RootState) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
     //in the future id assignment to the book will be implemented on the server
     dispatch(openView('catalog'))
     //const id = await fetch('/api/books', { method: 'POST' }, book)
@@ -66,7 +66,7 @@ export function fetchBooksResponse(books: JsonBook[]) {
 
 export function initBooks() {
   // action creator
-  return (dispatch, getState) => {
+  return (dispatch: AppDispatch, getState: () => RootState) => {
     //thunk function
     const { books } = getState()
     if (books.books.length === 0) {
@@ -78,7 +78,7 @@ export function initBooks() {
 
 export const getAllBooks = () => {
   //action creator
-  return async (dispatch, getState) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
     //thunk function
     dispatch(fetchBooksRequest()) // call action creator, start loading
     const response = await fetch('/data/books.json')
@@ -96,7 +96,7 @@ function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,
     status: bookStatus(book.status),
-    borrowDate: new Date(book.borrowDate),
-    returnDate: new Date(book.returnDate)
+    borrowDate: book.borrowDate ? new Date(book.borrowDate) : undefined,
+    returnDate: book.returnDate ? new Date(book.returnDate) : undefined
   }
 }

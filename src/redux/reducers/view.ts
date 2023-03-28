@@ -4,7 +4,7 @@ const initialState = {
   activeView: 'none',
   parameters: {}
 }
-export default function viewReducer(state: ViewState = initialState, action: any) {
+export default function viewReducer(state: ViewState = initialState, action: BookAction) {
   switch (action.type) {
     case OPEN_VIEW: {
       return {

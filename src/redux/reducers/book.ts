@@ -7,7 +7,7 @@ import {
 } from '../actions/book'
 
 const initialState = { isLoading: false, books: [] }
-export default function bookReducer(state: BooksState = initialState, action: any) {
+export default function bookReducer(state: BooksState = initialState, action: BookAction) {
   switch (action.type) {
     case FETCH_BOOKS_START:
       return {

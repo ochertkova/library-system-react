@@ -41,7 +41,8 @@ export default function ContentTable() {
 
   const rows = books
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    event?.preventDefault()
     setPage(newPage)
   }
 
@@ -77,7 +78,7 @@ export default function ContentTable() {
                   hover
                   role="checkbox"
                   tabIndex={-1}
-                  key={row.ISBN}
+                  key={row.id}
                   onClick={() => dispatch(openBook(row.id))}>
                   {columns.map((column) => {
                     const value = row[column.id]
