@@ -13,8 +13,6 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import { openBook } from '../../redux/actions/view'
-import { RootState } from '../../redux/store'
-import Typography from '@mui/material/Typography'
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -32,14 +30,15 @@ const columns: readonly Column[] = [
   { id: 'status', label: 'Status', minWidth: 100 }
 ]
 
-export default function ContentTable() {
-  const { isLoading, books } = useSelector((state: RootState) => state.books)
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+interface ContentTableProps {
+  books: Book[]
+}
 
+export default function ContentTable({ books }: ContentTableProps) {
   const dispatch = useDispatch()
 
-  const rows = books
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     event?.preventDefault()
@@ -51,10 +50,7 @@ export default function ContentTable() {
     setPage(0)
   }
 
-  if (isLoading) {
-    return <Typography>Loading books....</Typography>
-  }
-
+  const rows = books
   return (
     <Paper sx={{ width: '100%', overflow: 'auto' }}>
       <TableContainer component={Paper}>

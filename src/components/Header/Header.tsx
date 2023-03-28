@@ -86,7 +86,7 @@ const getPages = ({ isAuthenticated, user }: UserState) =>
           },
           {
             label: 'My Loans',
-            viewName: 'loans'
+            viewName: 'myLoans'
           }
         ]
     : [
@@ -107,6 +107,8 @@ const Header = () => {
     setAnchorElNav(null)
   }
   const userState = useSelector((state: RootState) => state.user)
+  const [searchText, setSearchText] = React.useState<string>('')
+
   const pages = getPages(userState)
 
   return (
@@ -177,7 +179,17 @@ const Header = () => {
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.code === 'Enter') {
+                    dispatch(openView('search', { searchText }))
+                  }
+                }}
+              />
             </Search>
           </Box>
           {userState.isAuthenticated && (

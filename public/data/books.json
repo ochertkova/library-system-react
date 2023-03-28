@@ -8,10 +8,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 10,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 2,
@@ -22,7 +22,7 @@
     "publisher": "Scholastic US, United States",
     "authors": "J. K. Rowling",
     "status": "borrowed",
-    "borrowerId": 4,
+    "borrowerId": 1,
     "publishedDate": "2006",
     "borrowDate": "01/03/2023 1:35:20 PM",
     "returnDate": "01/17/2023 1:35:20 PM"
@@ -36,10 +36,10 @@
     "publisher": "HarperCollins",
     "authors": "J. R. R. Tolkien",
     "status": "available",
-    "borrowerId": 5,
+    "borrowerId": null,
     "publishedDate": "2008",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 4,
@@ -50,10 +50,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 5,
@@ -66,8 +66,8 @@
     "status": "available",
     "borrowerId": 1,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 6,
@@ -78,10 +78,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 7,
@@ -92,10 +92,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 8,
@@ -106,10 +106,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/20231:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 9,
@@ -120,10 +120,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 10,
@@ -134,10 +134,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 11,
@@ -148,10 +148,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 12,
@@ -162,10 +162,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 13,
@@ -176,10 +176,10 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   },
   {
     "id": 14,
@@ -190,9 +190,9 @@
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
     "status": "available",
-    "borrowerId": 1,
+    "borrowerId": null,
     "publishedDate": "February 2000",
-    "borrowDate": "01/03/2023 1:35:20 PM",
-    "returnDate": "01/17/2023 1:35:20 PM"
+    "borrowDate": null,
+    "returnDate": null
   }
 ]

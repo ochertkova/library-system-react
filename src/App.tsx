@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import Header from './components/Header/Header'
 import { handleLogin, handleLogout } from './redux/actions/user'
-import ContentTable from './components/ContentTable/ContentTable'
 import BookInfo from './components/BookInfo/BookInfo'
 import AddAuthor from './components/AddAuthor/AddAuthor'
 import AddBook from './components/AddBook/AddBook'
+import Catalog from './components/Catalog/Catalog'
+import MyLoans from './components/MyLoans/MyLoans'
+import SearchResult from './components/SearchResult/SearchResult'
 
 function WelcomeScreen() {
   return <Typography>Welcome to Library System</Typography>
@@ -16,13 +18,17 @@ function WelcomeScreen() {
 function getContentComponent(activeView: string) {
   switch (activeView) {
     case 'catalog':
-      return ContentTable
+      return Catalog
     case 'bookinfo':
       return BookInfo
     case 'addAuthor':
       return AddAuthor
     case 'addBook':
       return AddBook
+    case 'myLoans':
+      return MyLoans
+    case 'search':
+      return SearchResult
     default:
       return WelcomeScreen
   }
