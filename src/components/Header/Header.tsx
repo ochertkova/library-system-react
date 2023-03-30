@@ -9,7 +9,8 @@ import {
   Box,
   MenuItem,
   Menu,
-  Button
+  Button,
+  Link as MuiLink
 } from '@mui/material'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -19,7 +20,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { openView } from '../../redux/actions/view'
+import { handleLogout } from '../../redux/actions/user'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,43 +71,59 @@ const getPages = ({ isAuthenticated, user }: UserState) =>
       ? [
           {
             label: 'Catalog',
-            viewName: 'catalog'
+            viewName: 'catalog',
+            path: '/catalog'
           },
           {
             label: 'Add Author',
-            viewName: 'addAuthor'
+            viewName: 'addAuthor',
+            path: '/addAuthor'
           },
           {
             label: 'Add Book',
-            viewName: 'addBook'
+            viewName: 'addBook',
+            path: '/addBook'
           }
         ]
       : [
           {
             label: 'Catalog',
-            viewName: 'catalog'
+            viewName: 'catalog',
+            path: '/catalog'
           },
           {
             label: 'My Loans',
-            viewName: 'myLoans'
+            viewName: 'myLoans',
+            path: '/myLoans'
           }
         ]
     : [
         {
           label: 'Catalog',
-          viewName: 'catalog'
+          viewName: 'catalog',
+          path: '/catalog'
         }
       ]
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
+  }
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget)
+  }
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
   }
   const userState = useSelector((state: RootState) => state.user)
   const [searchText, setSearchText] = React.useState<string>('')
@@ -144,14 +162,14 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' }
               }}>
               {pages.map((page) => (
-                <MenuItem
-                  key={page.label}
-                  onClick={() => {
-                    handleCloseNavMenu()
-                    dispatch(openView(page.viewName))
-                  }}>
-                  <Typography textAlign="center">{page.label}</Typography>
-                </MenuItem>
+                <Link to={page.path} key={page.label}>
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseNavMenu()
+                    }}>
+                    <Typography textAlign="center">{page.label}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -160,9 +178,9 @@ const Header = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <Button variant="contained" onClick={(e) => dispatch(openView('welcomeScreen'))}>
-              Library System
-            </Button>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <Button variant="contained">Library System</Button>
+            </Link>
             <MenuBookIcon
               sx={{
                 position: 'relative',
@@ -173,15 +191,16 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={() => {
-                  handleCloseNavMenu()
-                  dispatch(openView(page.viewName))
-                }}
-                sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page.label}
-              </Button>
+              <Link to={page.path} key={page.label} style={{ textDecoration: 'none' }}>
+                <Button
+                  key={page.label}
+                  onClick={() => {
+                    handleCloseNavMenu()
+                  }}
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                  {page.label}
+                </Button>
+              </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
@@ -197,7 +216,7 @@ const Header = () => {
                 onKeyPress={(e) => {
                   if (e.code === 'Enter') {
                     setSearchText('')
-                    dispatch(openView('search', { searchText }))
+                    navigate('/search/' + searchText)
                   }
                 }}
               />
@@ -206,7 +225,32 @@ const Header = () => {
           {userState.isAuthenticated && (
             <Box sx={{ flexGrow: 0, paddingLeft: 2 }}>
               <Typography>
-                Logged in as {userState.user?.name}
+                Logged in as
+                <MuiLink sx={{ color: 'white', p: 1 }} onClick={handleOpenUserMenu}>
+                  {userState.user?.name}
+                </MuiLink>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}>
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseUserMenu()
+                      dispatch(handleLogout())
+                    }}>
+                    <Typography textAlign="center">Log out</Typography>
+                  </MenuItem>
+                </Menu>
                 {userState.user?.isAdmin && (
                   <AdminPanelSettingsIcon
                     sx={{

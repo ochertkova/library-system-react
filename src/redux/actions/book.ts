@@ -1,6 +1,5 @@
 import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
 import { AppDispatch, RootState } from '../store'
-import { openBook, openView } from './view'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
 export const RETURN_BOOK = 'RETURN_BOOK'
@@ -26,8 +25,6 @@ export function handleReturn(userId: number, bookId: number) {
 
 export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    //in the future id assignment to the book will be implemented on the server
-    dispatch(openView('catalog'))
     //const id = await fetch('/api/books', { method: 'POST' }, book)
     const books = getState().books.books
     const id = books.slice(-1)[0].id + 1
@@ -40,7 +37,6 @@ export function handleAddComplete(book: Book) {
 
 export function handleUpdate(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    dispatch(openBook(book.id))
     return dispatch(handleUpdateComplete(book))
   }
 }
@@ -53,7 +49,6 @@ export function handleUpdateComplete(book: Book) {
 }
 export function handleRemove(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    dispatch(openView('catalog'))
     return dispatch(handleRemoveComplete(book))
   }
 }

@@ -1,9 +1,11 @@
 import { Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { RootState } from '../../redux/store'
 import ContentTable from '../ContentTable/ContentTable'
 
-function bookMatches(book: Book, searchText: string) {
+function bookMatches(book: Book, searchText: string | undefined) {
+  if (!searchText) return false
   const searchTextLowerCase = searchText.toLowerCase()
 
   if (book.title.toLowerCase().includes(searchTextLowerCase)) return true
@@ -17,9 +19,8 @@ function bookMatches(book: Book, searchText: string) {
 
 export default function SearchResult() {
   const { isLoading, books } = useSelector((state: RootState) => state.books)
-  const { parameters } = useSelector((state: RootState) => state.view)
 
-  const searchText = parameters.searchText
+  const { searchText } = useParams()
   if (isLoading) {
     return <Typography>Loading books....</Typography>
   }

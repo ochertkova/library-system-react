@@ -4,14 +4,19 @@ import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleUpdate } from '../../redux/actions/book'
 import { AppDispatch, RootState } from '../../redux/store'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const UpdateBook = () => {
   const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const bookId = Number(useParams().id)
+  console.log(bookId)
 
   const { isLoading, books } = useSelector((state: RootState) => state.books)
-  const { parameters } = useSelector((state: RootState) => state.view)
-  const bookForUpdate: Book = books.find((book: Book) => book.id === parameters.id)
-  console.log(parameters)
+
+  const bookForUpdate: Book = books.find((book: Book) => book.id === bookId)
+
   console.log(bookForUpdate)
 
   const formik = useFormik({
@@ -31,7 +36,8 @@ const UpdateBook = () => {
         cover: bookForUpdate.cover
       }
       console.log(values)
-      dispatch(handleUpdate(valuesWithIdStatus))
+      navigate(`/bookInfo/${bookForUpdate.id}`)
+      return dispatch(handleUpdate(valuesWithIdStatus))
     },
     validationSchema: Yup.object({
       ISBN: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),
@@ -44,7 +50,7 @@ const UpdateBook = () => {
   })
   return (
     <Stack spacing={2}>
-      <Box>Edit Book</Box>
+      <Box>Edit book</Box>
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>
@@ -109,7 +115,7 @@ const UpdateBook = () => {
           </FormControl>
 
           <Button variant="contained" type="submit">
-            Edit Book
+            Save changes
           </Button>
         </Stack>
       </Box>

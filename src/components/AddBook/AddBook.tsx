@@ -4,9 +4,11 @@ import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import { handleAdd } from '../../redux/actions/book'
 import { AppDispatch } from '../../redux/store'
+import { useNavigate } from 'react-router-dom'
 
 const AddBook = () => {
   const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       ISBN: '',
@@ -18,7 +20,8 @@ const AddBook = () => {
     },
     onSubmit: (values: Omit<Book, 'id' | 'status'>) => {
       console.log(values)
-      dispatch(handleAdd(values))
+      navigate('/catalog')
+      return dispatch(handleAdd(values))
     },
     validationSchema: Yup.object({
       ISBN: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),

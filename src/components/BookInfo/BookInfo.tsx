@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 import { handleBorrow, handleRemove, handleReturn, handleUpdate } from '../../redux/actions/book'
-import { openBookForUpdate } from '../../redux/actions/view'
+import { Link, useParams } from 'react-router-dom'
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, user } = userState
@@ -24,15 +24,16 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
             </Box>
           </>
         )}
-        <Button
-          sx={{ m: 2 }}
-          variant="contained"
-          onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>
-          Update Book
-        </Button>
-        <Button sx={{ m: 2 }} variant="contained" onClick={() => dispatch(handleRemove(book))}>
-          Remove Book
-        </Button>
+        <Link to={`/updateBook/${book.id}`} style={{ textDecoration: 'none' }}>
+          <Button sx={{ m: 2 }} variant="contained">
+            Update Book
+          </Button>
+        </Link>
+        <Link to="/catalog" style={{ textDecoration: 'none' }}>
+          <Button sx={{ m: 2 }} variant="contained" onClick={() => dispatch(handleRemove(book))}>
+            Remove Book
+          </Button>
+        </Link>
       </>
     )
   }
@@ -60,12 +61,12 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
 }
 
 const BookInfo = () => {
-  const { id } = useSelector((state: RootState) => state.view.parameters)
   const userState = useSelector((state: RootState) => state.user)
   const booksState = useSelector((state: RootState) => state.books)
   const dispatch: AppDispatch = useDispatch()
+  const bookId = Number(useParams().id)
 
-  const book = booksState.books.find((b: Book) => b.id === id)
+  const book = booksState.books.find((b: Book) => b.id === bookId)
 
   const ExtraFunctions = getFunctions(userState, book, dispatch)
 

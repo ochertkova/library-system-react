@@ -1,13 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import userReducer from './reducers/user'
-import viewReducer from './reducers/view'
 import bookReducer from './reducers/book'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    view: viewReducer,
     books: bookReducer
   },
   middleware: (getDefaultMiddleware) =>

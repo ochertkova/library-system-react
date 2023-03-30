@@ -12,8 +12,8 @@ import {
   TableRow
 } from '@mui/material'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { openBook } from '../../redux/actions/view'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -38,6 +38,8 @@ interface ContentTableProps {
 
 export default function ContentTable({ books }: ContentTableProps) {
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -78,7 +80,7 @@ export default function ContentTable({ books }: ContentTableProps) {
                   role="checkbox"
                   tabIndex={-1}
                   key={row.id}
-                  onClick={() => dispatch(openBook(row.id))}>
+                  onClick={() => navigate(`/bookInfo/${row.id}`)}>
                   {columns.map((column) => {
                     const value = row[column.id]
                     if (column.id === 'cover') {
