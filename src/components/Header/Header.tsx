@@ -160,8 +160,16 @@ const Header = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            Library System
-            <MenuBookIcon />
+            <Button variant="contained" onClick={(e) => dispatch(openView('welcomeScreen'))}>
+              Library System
+            </Button>
+            <MenuBookIcon
+              sx={{
+                position: 'relative',
+                top: '5px',
+                paddingLeft: 1
+              }}
+            />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -188,6 +196,7 @@ const Header = () => {
                 onChange={(e) => setSearchText(e.target.value)}
                 onKeyPress={(e) => {
                   if (e.code === 'Enter') {
+                    setSearchText('')
                     dispatch(openView('search', { searchText }))
                   }
                 }}
@@ -195,9 +204,19 @@ const Header = () => {
             </Search>
           </Box>
           {userState.isAuthenticated && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Typography>Logged in as {userState.user?.name}</Typography>
-              {userState.user?.isAdmin && <AdminPanelSettingsIcon />}
+            <Box sx={{ flexGrow: 0, paddingLeft: 2 }}>
+              <Typography>
+                Logged in as {userState.user?.name}
+                {userState.user?.isAdmin && (
+                  <AdminPanelSettingsIcon
+                    sx={{
+                      position: 'relative',
+                      top: '5px',
+                      paddingLeft: 1
+                    }}
+                  />
+                )}
+              </Typography>
             </Box>
           )}
         </Toolbar>

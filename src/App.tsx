@@ -11,10 +11,7 @@ import Catalog from './components/Catalog/Catalog'
 import MyLoans from './components/MyLoans/MyLoans'
 import SearchResult from './components/SearchResult/SearchResult'
 import UpdateBook from './components/UpdateBook/UpdateBook'
-
-function WelcomeScreen() {
-  return <Typography>Welcome to Library System</Typography>
-}
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
 
 function getContentComponent(activeView: string) {
   switch (activeView) {
@@ -46,9 +43,6 @@ function App() {
   return (
     <>
       <Header />
-      <Button onClick={() => dispatch(handleLogin(1))}>Log in</Button>
-      <Button onClick={() => dispatch(handleLogin(2))}>Log in a admin</Button>
-      <Button onClick={() => dispatch(handleLogout())}>Log out</Button>
       <Typography component="span">
         <Content />
       </Typography>

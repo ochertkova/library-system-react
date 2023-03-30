@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Box,
   Paper,
+  SxProps,
   Table,
   TableBody,
   TableCell,
@@ -19,11 +20,12 @@ interface Column {
   label: string
   minWidth?: number
   align?: 'right'
+  sx?: SxProps
   format?: (value: number) => string
 }
 
 const columns: readonly Column[] = [
-  { id: 'cover', label: 'Cover', minWidth: 170 },
+  { id: 'cover', label: 'Cover', minWidth: 170, sx: { display: { xs: 'none', md: 'block' } } },
   { id: 'ISBN', label: 'ISBN', minWidth: 100 },
   { id: 'title', label: 'Title', minWidth: 100 },
   { id: 'authors', label: 'Authors', minWidth: 100 },
@@ -61,7 +63,8 @@ export default function ContentTable({ books }: ContentTableProps) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}>
+                  style={{ minWidth: column.minWidth }}
+                  sx={column.sx}>
                   {column.label}
                 </TableCell>
               ))}
@@ -80,7 +83,10 @@ export default function ContentTable({ books }: ContentTableProps) {
                     const value = row[column.id]
                     if (column.id === 'cover') {
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{ display: { xs: 'none', md: 'block' } }}>
                           <Box
                             component="img"
                             sx={{

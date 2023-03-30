@@ -24,10 +24,13 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
             </Box>
           </>
         )}
-        <Button variant="contained" onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>
+        <Button
+          sx={{ m: 2 }}
+          variant="contained"
+          onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>
           Update Book
         </Button>
-        <Button variant="contained" onClick={() => dispatch(handleRemove(book))}>
+        <Button sx={{ m: 2 }} variant="contained" onClick={() => dispatch(handleRemove(book))}>
           Remove Book
         </Button>
       </>
@@ -67,14 +70,15 @@ const BookInfo = () => {
   const ExtraFunctions = getFunctions(userState, book, dispatch)
 
   return (
-    <Grid container direction="row" spacing={1}>
+    <Grid container direction="row" spacing={1} sx={{ p: 3 }}>
       <Grid item xs={1} md={1}></Grid>
       <Grid item xs={2} md={1}>
         <Box
           component="img"
           sx={{
             height: 150,
-            maxHeight: { xs: 100, md: 120 }
+            maxHeight: { xs: 100, md: 120 },
+            display: { xs: 'none', md: 'block' }
           }}
           alt="Book cover"
           src={book?.cover}
@@ -84,6 +88,18 @@ const BookInfo = () => {
         <Box>
           <Grid container direction="column" spacing={1}>
             <Grid item xs={12} md={12}>
+              <Box
+                component="img"
+                sx={{
+                  p: 2,
+                  height: 150,
+                  maxHeight: { xs: 100, md: 120 },
+                  display: { xs: 'block', md: 'none' }
+                }}
+                alt="Book cover"
+                src={book?.cover}
+              />
+
               <Box>{book?.title}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
@@ -94,11 +110,7 @@ const BookInfo = () => {
             </Grid>
             <Grid item xs={12} md={12}>
               <Box>
-                <>
-                  Publisher:
-                  {book?.publisher}
-                  {book?.publishedDate}
-                </>
+                <>{`Publisher: ${book?.publisher}, ${book?.publishedDate}`}</>
               </Box>
             </Grid>
             <Grid item xs={12} md={12}>
