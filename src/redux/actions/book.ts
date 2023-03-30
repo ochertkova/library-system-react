@@ -51,11 +51,16 @@ export function handleUpdateComplete(book: Book) {
     payload: book
   }
 }
-
-export function handleRemove(id: number) {
+export function handleRemove(book: Book) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(openView('catalog'))
+    return dispatch(handleRemoveComplete(book))
+  }
+}
+export function handleRemoveComplete(book: Book) {
   return {
     type: REMOVE_BOOK,
-    payload: { id }
+    payload: book
   }
 }
 

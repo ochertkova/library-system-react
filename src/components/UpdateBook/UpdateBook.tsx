@@ -1,14 +1,4 @@
-import {
-  Box,
-  TextField,
-  Button,
-  Stack,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio
-} from '@mui/material'
+import { Box, TextField, Button, Stack, FormControl } from '@mui/material'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +10,7 @@ const UpdateBook = () => {
 
   const { isLoading, books } = useSelector((state: RootState) => state.books)
   const { parameters } = useSelector((state: RootState) => state.view)
-  const bookForUpdate = books.find((book: Book) => book.id === parameters.id)
+  const bookForUpdate: Book = books.find((book: Book) => book.id === parameters.id)
   console.log(parameters)
   console.log(bookForUpdate)
 

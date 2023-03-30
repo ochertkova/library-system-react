@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { handleBorrow, handleReturn, handleUpdate } from '../../redux/actions/book'
+import { handleBorrow, handleRemove, handleReturn, handleUpdate } from '../../redux/actions/book'
 import { openBookForUpdate } from '../../redux/actions/view'
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
@@ -24,7 +24,12 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
             </Box>
           </>
         )}
-        <Button onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>Update Book</Button>
+        <Button variant="contained" onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>
+          Update Book
+        </Button>
+        <Button variant="contained" onClick={() => dispatch(handleRemove(book))}>
+          Remove Book
+        </Button>
       </>
     )
   }
@@ -32,14 +37,18 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
     <>
       {book.status === 'available' && (
         <>
-          <Button onClick={() => dispatch(handleBorrow(user.id, book.id))}>Borrow</Button>
+          <Button variant="contained" onClick={() => dispatch(handleBorrow(user.id, book.id))}>
+            Borrow
+          </Button>
         </>
       )}
 
       <>
         {book.status === 'borrowed' && book.borrowerId === user?.id && (
           <>
-            <Button onClick={() => dispatch(handleReturn(user.id, book.id))}>Return</Button>
+            <Button variant="contained" onClick={() => dispatch(handleReturn(user.id, book.id))}>
+              Return
+            </Button>
           </>
         )}
       </>

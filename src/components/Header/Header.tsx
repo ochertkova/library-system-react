@@ -12,6 +12,7 @@ import {
   Button
 } from '@mui/material'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
 
 import { styled } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -160,6 +161,7 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             Library System
+            <MenuBookIcon />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
