@@ -1,10 +1,10 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { handleBorrow, handleReturn } from '../../redux/actions/book'
+import { AppDispatch, RootState } from '../../redux/store'
+import { handleBorrow, handleReturn, handleUpdate } from '../../redux/actions/book'
+import { openBookForUpdate } from '../../redux/actions/view'
 
-function getFunctions(userState: UserState, book: Book) {
-  const dispatch = useDispatch()
+function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, user } = userState
   if (!isAuthenticated || !user) return () => <></>
 
@@ -24,7 +24,7 @@ function getFunctions(userState: UserState, book: Book) {
             </Box>
           </>
         )}
-        <Button onClick={() => alert('moi')}>Test</Button>
+        <Button onClick={() => dispatch(openBookForUpdate(book.id, dispatch))}>Update Book</Button>
       </>
     )
   }
@@ -51,10 +51,11 @@ const BookInfo = () => {
   const { id } = useSelector((state: RootState) => state.view.parameters)
   const userState = useSelector((state: RootState) => state.user)
   const booksState = useSelector((state: RootState) => state.books)
+  const dispatch: AppDispatch = useDispatch()
 
   const book = booksState.books.find((b: Book) => b.id === id)
 
-  const ExtraFunctions = getFunctions(userState, book)
+  const ExtraFunctions = getFunctions(userState, book, dispatch)
 
   return (
     <Grid container direction="row" spacing={1}>

@@ -1,6 +1,6 @@
 import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
 import { AppDispatch, RootState } from '../store'
-import { openView } from './view'
+import { openBook, openView } from './view'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
 export const RETURN_BOOK = 'RETURN_BOOK'
@@ -34,16 +34,24 @@ export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
     return dispatch(handleAddComplete({ ...book, id, status: 'available' }))
   }
 }
-
 export function handleAddComplete(book: Book) {
   return { type: ADD_BOOK, payload: book }
 }
-export function handleUpdate(id: number) {
-  return {
-    type: UPDATE_BOOK,
-    payload: { id }
+
+export function handleUpdate(book: Book) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(openBook(book.id))
+    return dispatch(handleUpdateComplete(book))
   }
 }
+
+export function handleUpdateComplete(book: Book) {
+  return {
+    type: UPDATE_BOOK,
+    payload: book
+  }
+}
+
 export function handleRemove(id: number) {
   return {
     type: REMOVE_BOOK,

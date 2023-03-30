@@ -63,7 +63,7 @@
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
     "publisher": "London: Bloomsbury Pub Ltd",
     "authors": "J. K. Rowling",
-    "status": "available",
+    "status": "borrowed",
     "borrowerId": 1,
     "publishedDate": "February 2000",
     "borrowDate": null,

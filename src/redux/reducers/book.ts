@@ -3,7 +3,8 @@ import {
   BORROW_BOOK,
   FETCH_BOOKS_RESPONSE,
   FETCH_BOOKS_START,
-  RETURN_BOOK
+  RETURN_BOOK,
+  UPDATE_BOOK
 } from '../actions/book'
 
 const initialState = { isLoading: false, books: [] }
@@ -57,6 +58,17 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
       return {
         isLoading: false,
         books: [action.payload, ...state.books]
+      }
+    case UPDATE_BOOK:
+      const updatedBooks = state.books.map((book) => {
+        if (book.id === action.payload.id) {
+          return action.payload
+        }
+        return book
+      })
+      return {
+        isLoading: false,
+        books: updatedBooks
       }
     default:
       return state

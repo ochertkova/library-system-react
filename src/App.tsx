@@ -10,6 +10,7 @@ import AddBook from './components/AddBook/AddBook'
 import Catalog from './components/Catalog/Catalog'
 import MyLoans from './components/MyLoans/MyLoans'
 import SearchResult from './components/SearchResult/SearchResult'
+import UpdateBook from './components/UpdateBook/UpdateBook'
 
 function WelcomeScreen() {
   return <Typography>Welcome to Library System</Typography>
@@ -19,12 +20,14 @@ function getContentComponent(activeView: string) {
   switch (activeView) {
     case 'catalog':
       return Catalog
-    case 'bookinfo':
+    case 'bookInfo':
       return BookInfo
     case 'addAuthor':
       return AddAuthor
     case 'addBook':
       return AddBook
+    case 'updateBook':
+      return UpdateBook
     case 'myLoans':
       return MyLoans
     case 'search':
