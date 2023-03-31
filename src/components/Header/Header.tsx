@@ -162,7 +162,10 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' }
               }}>
               {pages.map((page) => (
-                <Link to={page.path} key={page.label}>
+                <Link
+                  to={page.path}
+                  key={page.label}
+                  style={{ textDecoration: 'none', color: 'black' }}>
                   <MenuItem
                     onClick={() => {
                       handleCloseNavMenu()
@@ -191,7 +194,10 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={page.path} key={page.label} style={{ textDecoration: 'none' }}>
+              <Link
+                to={page.path}
+                key={page.label}
+                style={{ textDecoration: 'none', color: 'black' }}>
                 <Button
                   key={page.label}
                   onClick={() => {

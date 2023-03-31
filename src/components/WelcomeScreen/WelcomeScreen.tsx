@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { handleLogin, handleLogout } from '../../redux/actions/user'
 
 function WelcomeScreen() {
