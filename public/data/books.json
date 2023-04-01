@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -15,7 +15,7 @@
   },
   {
     "id": 2,
-    "cover": "../../../public/images/prizoner-azkaban-cover.jpg",
+    "cover": "../../images/prizoner-azkaban-cover.jpg",
     "ISBN": "9780439136365",
     "title": "Harry Potter and the Prizoner of Azkaban",
     "description": "For twelve long years, the dread fortress of Azkaban held an infamous prisoner named Sirius Black. Convicted of killing thirteen people with a single curse, he was said to be the heir apparent to the Dark Lord, Voldemort.Now he has escaped, leaving only two clues as to where he might be headed: Harry Potter's defeat of You-Know-Who was Black's downfall as well. And the Azkaban guards heard Black muttering in his sleep, 'He's at Hogwarts . . . he's at Hogwarts.'Harry Potter isn't safe, not even within the walls of his magical school, surrounded by his friends. Because on top of it all, there may well be a traitor in their midst.",
@@ -29,7 +29,7 @@
   },
   {
     "id": 3,
-    "cover": "../../../public/images/fellowship-ring.jpg",
+    "cover": "../../images/fellowship-ring.jpg",
     "ISBN": "9780007269709",
     "title": "The Fellowship of the Ring",
     "description": "The first volume in J.R.R. Tolkien's epic adventure The Lord of the Rings One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell into the hands of Bilbo Baggins, as told in The Hobbit. In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task, as his elderly cousin Bilbo entrusts the Ring to his care. Frodo must leave his home and make a perilous journey across Middle-earth to the Cracks of Doom, there to destroy the Ring and foil the Dark Lord in his evil purpose.",
@@ -43,7 +43,7 @@
   },
   {
     "id": 4,
-    "cover": "../../../public/images/collective-intelligence.jpg",
+    "cover": "../../images/collective-intelligence.jpg",
     "ISBN": "1933988312",
     "title": "Collective Intelligence in Action",
     "description": "There's a great deal of wisdom in a crowd, but how do you listen to a thousand people talking at once  Identifying the wants, needs, and knowledge of internet users can be like listening to a mob.    In the Web 2.0 era, leveraging the collective power of user contributions, interactions, and feedback is the key to market dominance. A new category of powerful programming techniques lets you discover the patterns, inter-relationships, and individual profiles   the collective intelligence   locked in the data people leave behind as they surf websites, post blogs, and interact with other users.    Collective Intelligence in Action is a hands-on guidebook for implementing collective-intelligence concepts using Java. It is the first Java-based book to emphasize the underlying algorithms and technical implementation of vital data gathering and mining techniques like analyzing trends, discovering relationships, and making predictions. It provides a pragmatic approach to personalization by combining content-based analysis with collaborative approaches.    This book is for Java developers implementing collective intelligence in real, high-use applications. Following a running example in which you harvest and use information from blogs, you learn to develop software that you can embed in your own applications. The code examples are immediately reusable and give the Java developer a working collective intelligence toolkit.    Along the way, you work with, a number of APIs and open-source toolkits including text analysis and search using Lucene, web-crawling using Nutch, and applying machine learning algorithms using WEKA and the Java Data Mining (JDM) standard.",
@@ -57,7 +57,7 @@
   },
   {
     "id": 5,
-    "cover": "../../../public/images/mongo-db.jpg",
+    "cover": "../../images/mongo-db.jpg",
     "ISBN": "1935182870",
     "title": "MongoDB in Action",
     "description": "MongoDB is a document-oriented database that's highly scalable and delivers very high-performance, especially with massive data sets that need to be spread across multiple servers. It blends the things you expect with any database   like indexing, querying, and high availability   with powerful new features like easy horizontal scaling (\"auto-sharding\"), map/reduce aggregation, and a flexible document data model to support dynamic schemas.    MongoDB In Action is a comprehensive guide to MongoDB for application developers. The book begins by explaining what makes MongoDB unique and describing its ideal use cases. A series of tutorials designed for MongoDB mastery then leads into detailed examples for leveraging MongoDB in e-commerce, social networking, analytics, and other common applications.    Along the way, all of MongoDB's major features are covered, including:        * Indexes and explain plans for efficient queries      * Atomic operations for managing simple data structures and manipulating complex, rich documents      * GridFS for storing and managing large binary objects (images, videos, etc.) in MongoDB      * Map-reduce for custom aggregations and reporting      * Master-slave replication and replica sets for automated failover      * Auto-sharding for automated horizontal scaling    The handy reference section on schema design patterns will help ease the transition from the relational data model of SQL to MongoDB's document-based data model. The numerous, detailed examples are implemented in Ruby and include comprehensive explanations.    MongoDB has been gaining traction in the developer community for its speed, flexibility, scalability, and ease of use. With production deployments that include SourceForge, Foursquare, and Shutterfly, MongoDB is proving to be a robust and reliable database system that keeps developers happy. Covering everything from installation to application design to deployment, MongoDB In Action is written for the application developer who wants to take advantage of MongoDB and get up and running quickly.",
@@ -71,7 +71,7 @@
   },
   {
     "id": 6,
-    "cover": "../../../public/images/hello-python.jpg",
+    "cover": "../../images/hello-python.jpg",
     "ISBN": "1935182080",
     "title": "Hello! Python",
     "description": "Hello! Python fully covers the building blocks of Python programming and gives you a gentle introduction to more advanced topics such as object-oriented programming, functional programming, network programming, and program design. New (or nearly new) programmers will learn most of what they need to know to start using Python immediately.",
@@ -85,7 +85,7 @@
   },
   {
     "id": 7,
-    "cover": "../../../public/images/ios-in-practice.jpg",
+    "cover": "../../images/ios-in-practice.jpg",
     "ISBN": "1617291269",
     "title": "iOS in Practice",
     "description": "iOS in Practice is a hands-on guide with 98 specific techniques to help solve the specific problems you'll encounter over and over as you work on your iPhone and iPad apps. You'll dig into the practical nuts and bolts of applying views, view controllers, table views and cells, audio, images, graphics, file structure—and more. Examples written for iOS 6.",
@@ -99,7 +99,7 @@
   },
   {
     "id": 8,
-    "cover": "../../../public/images/sql-server-2008.jpg",
+    "cover": "../../images/sql-server-2008.jpg",
     "ISBN": "193398872X",
     "title": "SQL Server 2008 Administration in Action",
     "description": "SQL Server 2008 Administration isn't a standard SQL Server tutorial-thereare dozens of those to choose from. Instead, this book breaks down the role of'SQL Server Administrator' into its key focus areas and tasks and details thetechniques and best practices that make an administrator effective.In this book, a reader can quickly identify a task and find the best practiceassociated with it. For example, a reader looking for information about indexingwould find...",
@@ -113,7 +113,7 @@
   },
   {
     "id": 9,
-    "cover": "../../../public/images/html5-css3.jpg",
+    "cover": "../../images/html5-css3.jpg",
     "ISBN": "1935182897",
     "title": "Hello! HTML5 & CSS3",
     "description": "Hello! HTML5 & CSS3 is written for the web designer or developer who wants a fast, example-oriented introduction to the new HTML and CSS features. This snappy, user-friendly, and fun guide will get you started right away.",
@@ -127,7 +127,7 @@
   },
   {
     "id": 10,
-    "cover": "../../../public/images/java-examples.jpg",
+    "cover": "../../images/java-examples.jpg",
     "ISBN": "9781565923713",
     "title": "Java Examples in a Nutshell",
     "description": "Java Examples in a Nutshell is chock full of practical real-world Java programming examples. The author of the bestsellingJava in a Nutshell has created an entire book of example programs that you can learn from and modify for your own use. If you learn best 'by example,' this is the book for you.This book is a companion volume to Java in a Nutshell.",
@@ -141,7 +141,7 @@
   },
   {
     "id": 11,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -155,7 +155,7 @@
   },
   {
     "id": 12,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -169,7 +169,7 @@
   },
   {
     "id": 13,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -183,7 +183,7 @@
   },
   {
     "id": 14,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -197,7 +197,7 @@
   },
   {
     "id": 15,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -211,7 +211,7 @@
   },
   {
     "id": 16,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -225,7 +225,7 @@
   },
   {
     "id": 17,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
@@ -239,7 +239,7 @@
   },
   {
     "id": 18,
-    "cover": "../../../public/images/harry-potter-cover.jpg",
+    "cover": "../../images/harry-potter-cover.jpg",
     "ISBN": "9780747532743",
     "title": "Harry Potter and the Philosopher's Stone (Harry Potter)",
     "description": "Harry Potter and the Philosopher's Stone is the first novel in the Harry Potter series and features Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Voldemort, who killed Harry's parents and tried to kill Harry when he was one year old.",
