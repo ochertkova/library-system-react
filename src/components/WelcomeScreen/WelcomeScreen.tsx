@@ -1,9 +1,11 @@
 import { Box, Button, Typography } from '@mui/material'
 import { useDispatch } from 'react-redux'
+
 import { handleLogin, handleLogout } from '../../redux/actions/user'
 
 function WelcomeScreen() {
   const dispatch = useDispatch()
+
   return (
     <Typography component="div" textAlign={'center'}>
       <Box>
@@ -40,4 +42,5 @@ function WelcomeScreen() {
     </Typography>
   )
 }
+
 export default WelcomeScreen

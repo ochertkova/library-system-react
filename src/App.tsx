@@ -1,5 +1,5 @@
-import { Button, Typography } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
+import { Route, Routes } from 'react-router-dom'
 
 import Header from './components/Header/Header'
 import BookInfo from './components/BookInfo/BookInfo'
@@ -10,7 +10,6 @@ import MyLoans from './components/MyLoans/MyLoans'
 import SearchResult from './components/SearchResult/SearchResult'
 import UpdateBook from './components/UpdateBook/UpdateBook'
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
-import { Route, Routes } from 'react-router-dom'
 
 function App() {
   return (

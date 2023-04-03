@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
 import { RootState } from '../../redux/store'
 import ContentTable from '../ContentTable/ContentTable'
 
@@ -19,8 +20,8 @@ function bookMatches(book: Book, searchText: string | undefined) {
 
 export default function SearchResult() {
   const { isLoading, books } = useSelector((state: RootState) => state.books)
-
   const { searchText } = useParams()
+
   if (isLoading) {
     return <Typography>Loading books....</Typography>
   }

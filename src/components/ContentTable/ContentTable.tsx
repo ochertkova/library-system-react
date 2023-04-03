@@ -11,9 +11,7 @@ import {
   TablePagination,
   TableRow
 } from '@mui/material'
-
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
 interface Column {
   id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
@@ -37,10 +35,7 @@ interface ContentTableProps {
 }
 
 export default function ContentTable({ books }: ContentTableProps) {
-  const dispatch = useDispatch()
-
   const navigate = useNavigate()
-
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 

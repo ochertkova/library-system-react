@@ -2,22 +2,18 @@ import { Box, TextField, Button, Stack, FormControl } from '@mui/material'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { handleUpdate } from '../../redux/actions/book'
 import { AppDispatch, RootState } from '../../redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
 
 const UpdateBook = () => {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
-
   const bookId = Number(useParams().id)
-  console.log(bookId)
-
   const { isLoading, books } = useSelector((state: RootState) => state.books)
 
   const bookForUpdate: Book = books.find((book: Book) => book.id === bookId)
-
-  console.log(bookForUpdate)
 
   const formik = useFormik({
     initialValues: {
@@ -113,7 +109,6 @@ const UpdateBook = () => {
               helperText={formik.touched.description && formik.errors.description}
             />
           </FormControl>
-
           <Button variant="contained" type="submit">
             Save changes
           </Button>

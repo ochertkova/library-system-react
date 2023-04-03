@@ -13,15 +13,15 @@ import {
   Link as MuiLink
 } from '@mui/material'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
-
-import { styled } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+
 import { RootState } from '../../redux/store'
 import { handleLogout } from '../../redux/actions/user'
-import { Link, redirect, useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -108,9 +108,10 @@ const getPages = ({ isAuthenticated, user }: UserState) =>
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
-
+  const userState = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [searchText, setSearchText] = React.useState<string>('')
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -118,15 +119,12 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
-
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-  const userState = useSelector((state: RootState) => state.user)
-  const [searchText, setSearchText] = React.useState<string>('')
 
   const pages = getPages(userState)
 

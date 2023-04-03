@@ -1,8 +1,9 @@
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../redux/store'
-import { handleBorrow, handleRemove, handleReturn, handleUpdate } from '../../redux/actions/book'
 import { Link, useParams } from 'react-router-dom'
+
+import { AppDispatch, RootState } from '../../redux/store'
+import { handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, user } = userState
@@ -46,7 +47,6 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
           </Button>
         </>
       )}
-
       <>
         {book.status === 'borrowed' && book.borrowerId === user?.id && (
           <>
@@ -100,7 +100,6 @@ const BookInfo = () => {
                 alt="Book cover"
                 src={book?.cover}
               />
-
               <Box>{book?.title}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
@@ -120,7 +119,6 @@ const BookInfo = () => {
             <Grid item xs={12} md={12}>
               <Box>Status: {book?.status}</Box>
             </Grid>
-
             <Grid item xs={12} md={12}>
               <ExtraFunctions />
             </Grid>

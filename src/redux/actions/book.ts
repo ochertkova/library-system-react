@@ -1,4 +1,5 @@
 import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
+
 import { AppDispatch, RootState } from '../store'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
@@ -15,17 +16,14 @@ export function handleBorrow(userId: number, bookId: number) {
     payload: { userId, bookId }
   }
 }
-
 export function handleReturn(userId: number, bookId: number) {
   return {
     type: RETURN_BOOK,
     payload: { userId, bookId }
   }
 }
-
 export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    //const id = await fetch('/api/books', { method: 'POST' }, book)
     const books = getState().books.books
     const id = books.slice(-1)[0].id + 1
     return dispatch(handleAddComplete({ ...book, id, status: 'available' }))
@@ -34,13 +32,11 @@ export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
 export function handleAddComplete(book: Book) {
   return { type: ADD_BOOK, payload: book }
 }
-
 export function handleUpdate(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     return dispatch(handleUpdateComplete(book))
   }
 }
-
 export function handleUpdateComplete(book: Book) {
   return {
     type: UPDATE_BOOK,
@@ -58,20 +54,17 @@ export function handleRemoveComplete(book: Book) {
     payload: book
   }
 }
-
 export function fetchBooksRequest() {
   return {
     type: FETCH_BOOKS_START
   }
 }
-
 export function fetchBooksResponse(books: JsonBook[]) {
   return {
     type: FETCH_BOOKS_RESPONSE,
     payload: books.map(jsonBookToBook)
   }
 }
-
 export function initBooks() {
   // action creator
   return (dispatch: AppDispatch, getState: () => RootState) => {
@@ -83,7 +76,6 @@ export function initBooks() {
     return Promise.resolve()
   }
 }
-
 export const getAllBooks = () => {
   //action creator
   return async (dispatch: AppDispatch, getState: () => RootState) => {
