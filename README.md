@@ -5,7 +5,7 @@ This is a simple App which I developed as a Front-end assignment for Integrify F
 The App is deployed at:
 https://library-system.herokuapp.com/
 
-Tech Stack: React, Typescript, Redux.
+Tech Stack: React, Typescript, Redux, Material UI.
 
 ## Setup & Installation
 
