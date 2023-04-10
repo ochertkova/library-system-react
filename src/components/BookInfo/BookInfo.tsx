@@ -26,12 +26,15 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
           </>
         )}
         <Link to={`/updateBook/${book.id}`} style={{ textDecoration: 'none' }}>
-          <Button sx={{ m: 2 }} variant="contained">
+          <Button sx={{ marginTop: 2, marginRight: 2 }} variant="contained">
             Update Book
           </Button>
         </Link>
         <Link to="/catalog" style={{ textDecoration: 'none' }}>
-          <Button sx={{ m: 2 }} variant="contained" onClick={() => dispatch(handleRemove(book))}>
+          <Button
+            sx={{ marginTop: 2 }}
+            variant="contained"
+            onClick={() => dispatch(handleRemove(book))}>
             Remove Book
           </Button>
         </Link>
@@ -42,7 +45,10 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
     <>
       {book.status === 'available' && (
         <>
-          <Button variant="contained" onClick={() => dispatch(handleBorrow(user.id, book.id))}>
+          <Button
+            variant="contained"
+            sx={{ marginTop: 2 }}
+            onClick={() => dispatch(handleBorrow(user.id, book.id))}>
             Borrow
           </Button>
         </>
@@ -56,7 +62,10 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
             <Box>
               <>Return by date: {book?.returnDate?.toDateString()}</>
             </Box>
-            <Button variant="contained" onClick={() => dispatch(handleReturn(user.id, book.id))}>
+            <Button
+              variant="contained"
+              sx={{ marginTop: 2 }}
+              onClick={() => dispatch(handleReturn(user.id, book.id))}>
               Return
             </Button>
           </>
@@ -84,6 +93,7 @@ const BookInfo = () => {
           component="img"
           sx={{
             height: 150,
+            marginTop: 3,
             maxHeight: { xs: 100, md: 120 },
             display: { xs: 'none', md: 'block' }
           }}
@@ -98,7 +108,6 @@ const BookInfo = () => {
               <Box
                 component="img"
                 sx={{
-                  p: 2,
                   height: 150,
                   maxHeight: { xs: 100, md: 120 },
                   display: { xs: 'block', md: 'none' }
@@ -106,7 +115,11 @@ const BookInfo = () => {
                 alt="Book cover"
                 src={book?.cover}
               />
-              <Box>{book?.title}</Box>
+              <Grid item xs={12} md={12}>
+                <Box>
+                  <h3>{book?.title}</h3>
+                </Box>
+              </Grid>
             </Grid>
             <Grid item xs={12} md={12}>
               <Box>{book?.authors}</Box>

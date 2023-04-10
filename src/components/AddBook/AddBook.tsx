@@ -35,7 +35,6 @@ const AddBook = () => {
   })
   return (
     <Stack spacing={2}>
-      <Box>Add Book</Box>
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>

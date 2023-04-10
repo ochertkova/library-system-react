@@ -66,8 +66,8 @@
     "status": "borrowed",
     "borrowerId": 1,
     "publishedDate": "2011",
-    "borrowDate": null,
-    "returnDate": null
+    "borrowDate": "04/10/2023 1:35:20 PM",
+    "returnDate": "04/24/2023 1:35:20 PM"
   },
   {
     "id": 6,
