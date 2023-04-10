@@ -31,7 +31,7 @@ const UpdateBook = () => {
         status: bookForUpdate.status,
         cover: bookForUpdate.cover
       }
-      console.log(values)
+
       navigate(`/bookInfo/${bookForUpdate.id}`)
       return dispatch(handleUpdate(valuesWithIdStatus))
     },

@@ -179,8 +179,8 @@ const Header = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              <Button variant="contained">Library System</Button>
+            <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+              Library System
             </Link>
             <MenuBookIcon
               sx={{

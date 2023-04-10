@@ -13,8 +13,8 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
   switch (action.type) {
     case FETCH_BOOKS_START:
       return {
-        isLoading: true,
-        books: []
+        ...state,
+        isLoading: true
       }
     case FETCH_BOOKS_RESPONSE:
       return {

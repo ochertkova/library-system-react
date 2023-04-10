@@ -9,11 +9,6 @@ type UserState = {
   isAuthenticated: boolean
 }
 
-type ViewState = {
-  activeView: string
-  parameters: object
-}
-
 type BooksState = {
   isLoading: boolean
   books: Book[]
