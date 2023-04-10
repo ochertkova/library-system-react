@@ -50,6 +50,12 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
       <>
         {book.status === 'borrowed' && book.borrowerId === user?.id && (
           <>
+            <Box>
+              <>Borrowed: {book?.borrowDate?.toDateString()}</>
+            </Box>
+            <Box>
+              <>Return by date: {book?.returnDate?.toDateString()}</>
+            </Box>
             <Button variant="contained" onClick={() => dispatch(handleReturn(user.id, book.id))}>
               Return
             </Button>

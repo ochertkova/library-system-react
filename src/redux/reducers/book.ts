@@ -1,3 +1,4 @@
+import { plusDays } from '../../utils'
 import {
   ADD_BOOK,
   BORROW_BOOK,
@@ -26,12 +27,13 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         isLoading: false,
         books: state.books.map((book) => {
           if (book.id === action.payload.bookId) {
+            const borrowDate = new Date()
             const borrowedBook = {
               ...book,
               status: 'borrowed',
               borrowerId: action.payload.userId,
-              borrowDate: new Date(),
-              returnDate: new Date()
+              borrowDate,
+              returnDate: plusDays(borrowDate, 14)
             }
             return borrowedBook
           }
