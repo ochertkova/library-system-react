@@ -9,7 +9,9 @@ function WelcomeScreen() {
   return (
     <Typography component="div" textAlign={'center'}>
       <Box>
-        <Box sx={{ p: 3 }}>Welcome to Library System</Box>
+        <Box sx={{ p: 3 }}>
+          <h3>Welcome to Library System</h3>
+        </Box>
         <Box
           sx={{
             flexGrow: 1,

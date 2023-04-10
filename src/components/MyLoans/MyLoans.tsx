@@ -15,7 +15,7 @@ export default function MyLoans() {
   const myBooks = books.filter((book: Book) => book.borrowerId === user?.id)
   return (
     <>
-      <Typography>My Loans. You have {myBooks.length} books on loan</Typography>
+      <Typography sx={{ m: 1 }}>You have {myBooks.length} books on loan</Typography>
       <ContentTable books={myBooks} />
     </>
   )
