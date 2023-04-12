@@ -1,4 +1,5 @@
 import { Box, Button, Grid } from '@mui/material'
+import BookIcon from '@mui/icons-material/Book'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
@@ -77,23 +78,30 @@ const BookInfo = () => {
 
   const book = booksState.books.find((b: Book) => b.id === bookId)
 
+  let cover = <BookIcon sx={{ fontSize: '80px', color: 'grey' }} />
+  if (book.cover) {
+    cover = (
+      <Box
+        component="img"
+        sx={{
+          height: 150,
+          marginTop: 3,
+          maxHeight: { xs: 100, md: 120 },
+          display: { xs: 'none', md: 'block' }
+        }}
+        alt="Book cover"
+        src={book?.cover}
+      />
+    )
+  }
+
   const ExtraFunctions = getFunctions(userState, book, dispatch)
 
   return (
     <Grid container direction="row" spacing={1} sx={{ p: 3 }}>
       <Grid item xs={1} md={1}></Grid>
       <Grid item xs={2} md={1}>
-        <Box
-          component="img"
-          sx={{
-            height: 150,
-            marginTop: 3,
-            maxHeight: { xs: 100, md: 120 },
-            display: { xs: 'none', md: 'block' }
-          }}
-          alt="Book cover"
-          src={book?.cover}
-        />
+        {cover}
       </Grid>
       <Grid item xs={7} md={8}>
         <Box>

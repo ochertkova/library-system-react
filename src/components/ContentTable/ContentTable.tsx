@@ -11,6 +11,7 @@ import {
   TablePagination,
   TableRow
 } from '@mui/material'
+import BookIcon from '@mui/icons-material/Book'
 import { useNavigate } from 'react-router-dom'
 
 interface Column {
@@ -79,20 +80,30 @@ export default function ContentTable({ books }: ContentTableProps) {
                   {columns.map((column) => {
                     const value = row[column.id]
                     if (column.id === 'cover') {
+                      if (row.cover) {
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{ display: { xs: 'none', md: 'block' } }}>
+                            <Box
+                              component="img"
+                              sx={{
+                                height: 150,
+                                maxHeight: { xs: 100, md: 120 }
+                              }}
+                              alt="Book cover"
+                              src={row.cover}
+                            />
+                          </TableCell>
+                        )
+                      }
                       return (
                         <TableCell
                           key={column.id}
                           align={column.align}
                           sx={{ display: { xs: 'none', md: 'block' } }}>
-                          <Box
-                            component="img"
-                            sx={{
-                              height: 150,
-                              maxHeight: { xs: 100, md: 120 }
-                            }}
-                            alt="Book cover"
-                            src={row.cover}
-                          />
+                          <BookIcon sx={{ fontSize: '80px', color: 'grey' }} />
                         </TableCell>
                       )
                     }
