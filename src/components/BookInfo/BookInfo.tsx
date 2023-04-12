@@ -7,6 +7,8 @@ import { handleBorrow, handleRemove, handleReturn } from '../../redux/actions/bo
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, user } = userState
+  const onClickRemove = () => dispatch(handleRemove(book))
+
   if (!isAuthenticated || !user) return () => <></>
 
   if (user?.isAdmin) {
@@ -31,46 +33,38 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
           </Button>
         </Link>
         <Link to="/catalog" style={{ textDecoration: 'none' }}>
-          <Button
-            sx={{ marginTop: 2 }}
-            variant="contained"
-            onClick={() => dispatch(handleRemove(book))}>
+          <Button sx={{ marginTop: 2 }} variant="contained" onClick={onClickRemove}>
             Remove Book
           </Button>
         </Link>
       </>
     )
   }
+  const onClickBorrow = () => dispatch(handleBorrow(user.id, book.id))
+  const onClickReturn = () => dispatch(handleReturn(user.id, book.id))
+
   return () => (
     <>
       {book.status === 'available' && (
         <>
-          <Button
-            variant="contained"
-            sx={{ marginTop: 2 }}
-            onClick={() => dispatch(handleBorrow(user.id, book.id))}>
+          <Button variant="contained" sx={{ marginTop: 2 }} onClick={onClickBorrow}>
             Borrow
           </Button>
         </>
       )}
-      <>
-        {book.status === 'borrowed' && book.borrowerId === user?.id && (
-          <>
-            <Box>
-              <>Borrowed: {book?.borrowDate?.toDateString()}</>
-            </Box>
-            <Box>
-              <>Return by date: {book?.returnDate?.toDateString()}</>
-            </Box>
-            <Button
-              variant="contained"
-              sx={{ marginTop: 2 }}
-              onClick={() => dispatch(handleReturn(user.id, book.id))}>
-              Return
-            </Button>
-          </>
-        )}
-      </>
+      {book.status === 'borrowed' && book.borrowerId === user?.id && (
+        <>
+          <Box>
+            <>Borrowed: {book?.borrowDate?.toDateString()}</>
+          </Box>
+          <Box>
+            <>Return by date: {book?.returnDate?.toDateString()}</>
+          </Box>
+          <Button variant="contained" sx={{ marginTop: 2 }} onClick={onClickReturn}>
+            Return
+          </Button>
+        </>
+      )}
     </>
   )
 }

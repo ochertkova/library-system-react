@@ -64,46 +64,51 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     }
   }
 }))
-
-const getPages = ({ isAuthenticated, user }: UserState) =>
-  isAuthenticated
-    ? user?.isAdmin
-      ? [
-          {
-            label: 'Catalog',
-            viewName: 'catalog',
-            path: '/catalog'
-          },
-          {
-            label: 'Add Author',
-            viewName: 'addAuthor',
-            path: '/addAuthor'
-          },
-          {
-            label: 'Add Book',
-            viewName: 'addBook',
-            path: '/addBook'
-          }
-        ]
-      : [
-          {
-            label: 'Catalog',
-            viewName: 'catalog',
-            path: '/catalog'
-          },
-          {
-            label: 'My Loans',
-            viewName: 'myLoans',
-            path: '/myLoans'
-          }
-        ]
-    : [
-        {
-          label: 'Catalog',
-          viewName: 'catalog',
-          path: '/catalog'
-        }
-      ]
+const adminPages = [
+  {
+    label: 'Catalog',
+    viewName: 'catalog',
+    path: '/catalog'
+  },
+  {
+    label: 'Add Author',
+    viewName: 'addAuthor',
+    path: '/addAuthor'
+  },
+  {
+    label: 'Add Book',
+    viewName: 'addBook',
+    path: '/addBook'
+  }
+]
+const userPages = [
+  {
+    label: 'Catalog',
+    viewName: 'catalog',
+    path: '/catalog'
+  },
+  {
+    label: 'My Loans',
+    viewName: 'myLoans',
+    path: '/myLoans'
+  }
+]
+const visitorPages = [
+  {
+    label: 'Catalog',
+    viewName: 'catalog',
+    path: '/catalog'
+  }
+]
+const getPages = ({ isAuthenticated, user }: UserState) => {
+  if (!isAuthenticated) {
+    return visitorPages
+  }
+  if (user?.isAdmin) {
+    return adminPages
+  }
+  return userPages
+}
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -125,7 +130,10 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-
+  const onClickLogout = () => {
+    handleCloseUserMenu()
+    dispatch(handleLogout())
+  }
   const pages = getPages(userState)
 
   return (
@@ -247,11 +255,7 @@ const Header = () => {
                   }}
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}>
-                  <MenuItem
-                    onClick={() => {
-                      handleCloseUserMenu()
-                      dispatch(handleLogout())
-                    }}>
+                  <MenuItem onClick={onClickLogout}>
                     <Typography textAlign="center">Log out</Typography>
                   </MenuItem>
                 </Menu>
