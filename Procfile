@@ -1,2 +1,2 @@
-web: python -m http.server --directory dist $PORT
+web: yarn run http-server-spa dist index.html $PORT
 
