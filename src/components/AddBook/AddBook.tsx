@@ -12,7 +12,7 @@ const AddBook = () => {
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
-      ISBN: '',
+      isbn: '',
       title: '',
       authors: '',
       publisher: '',
@@ -39,12 +39,12 @@ const AddBook = () => {
         <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>
             <TextField
-              id="ISBN"
+              id="isbn"
               label="ISBN"
               variant="outlined"
               {...formik.getFieldProps('ISBN')}
-              error={Boolean(formik.errors.ISBN && formik.touched.ISBN)}
-              helperText={formik.touched.ISBN && formik.errors.ISBN}
+              error={Boolean(formik.errors.isbn && formik.touched.isbn)}
+              helperText={formik.touched.isbn && formik.errors.isbn}
             />
           </FormControl>
           <FormControl>

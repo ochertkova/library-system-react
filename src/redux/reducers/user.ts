@@ -1,15 +1,33 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions/user'
-import usersData from '../../../public/data/users.json'
+import { LOGIN_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, USER_LOGOUT } from '../actions/user'
 
-const users: User[] = usersData
-
-const initialState = { isAuthenticated: false, user: undefined }
-export default function userReducer(state: UserState = initialState, action: BookAction) {
+const initialState = {
+  isAuthenticated: false,
+  user: undefined,
+  isLoggingIn: false,
+  errorMessage: undefined
+}
+export default function userReducer(state: UserState = initialState, action: UserAction) {
   switch (action.type) {
-    case USER_LOGIN: {
+    case LOGIN_REQUEST: {
+      return {
+        isAuthenticated: false,
+        isLoggingIn: true,
+        user: undefined
+      }
+    }
+    case LOGIN_RESPONSE: {
       return {
         isAuthenticated: true,
-        user: users.find((user) => user.id === action.payload.id)
+        isLoggingIn: false,
+        user: action.payload
+      }
+    }
+    case LOGIN_ERROR: {
+      return {
+        isAuthenticated: true,
+        isLoggingIn: false,
+        user: undefined,
+        errorMessage: action.payload.message
       }
     }
     case USER_LOGOUT: {

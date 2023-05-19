@@ -3,34 +3,51 @@ import {
   ADD_BOOK,
   BORROW_BOOK,
   FETCH_BOOKS_RESPONSE,
-  FETCH_BOOKS_START,
+  FETCH_BOOKS_REQUEST,
+  FETCH_BOOK_BY_ID_REQUEST,
+  FETCH_BOOK_BY_ID_RESPONSE,
   REMOVE_BOOK,
   RETURN_BOOK,
   UPDATE_BOOK
 } from '../actions/book'
 
-const initialState = { isLoading: false, books: [] }
+const initialState = { isLoading: false, books: [], activeBook: undefined }
 export default function bookReducer(state: BooksState = initialState, action: BookAction) {
   switch (action.type) {
-    case FETCH_BOOKS_START:
+    case FETCH_BOOKS_REQUEST:
       return {
         ...state,
         isLoading: true
       }
     case FETCH_BOOKS_RESPONSE:
       return {
+        ...state,
         isLoading: false,
         books: action.payload
       }
+    case FETCH_BOOK_BY_ID_REQUEST:
+      return {
+        ...state,
+        activeBook: undefined,
+        isLoading: true
+      }
+    case FETCH_BOOK_BY_ID_RESPONSE:
+      return {
+        ...state,
+        isLoading: false,
+        activeBook: action.payload
+      }
+
     case BORROW_BOOK:
       return {
+        ...state,
         isLoading: false,
         books: state.books.map((book) => {
           if (book.id === action.payload.bookId) {
             const borrowDate = new Date()
             const borrowedBook = {
               ...book,
-              status: 'borrowed',
+              status: 'BORROWED',
               borrowerId: action.payload.userId,
               borrowDate,
               returnDate: plusDays(borrowDate, 14)
@@ -42,12 +59,13 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
       }
     case RETURN_BOOK:
       return {
+        ...state,
         isLoading: false,
         books: state.books.map((book) => {
           if (book.id === action.payload.bookId) {
             const returnedBook = {
               ...book,
-              status: 'available',
+              status: 'AVAILABLE',
               borrowerId: null,
               borrowDate: null,
               returnDate: null
@@ -63,11 +81,13 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
       })
       console.log(updatedRemoveBooks)
       return {
+        ...state,
         isLoading: false,
         books: updatedRemoveBooks
       }
     case ADD_BOOK:
       return {
+        ...state,
         isLoading: false,
         books: [action.payload, ...state.books]
       }
@@ -79,6 +99,7 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         return book
       })
       return {
+        ...state,
         isLoading: false,
         books: updatedBooks
       }

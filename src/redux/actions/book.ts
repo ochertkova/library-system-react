@@ -1,14 +1,17 @@
 import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
 
 import { AppDispatch, RootState } from '../store'
+import books from '../../services/books'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
 export const RETURN_BOOK = 'RETURN_BOOK'
 export const ADD_BOOK = 'ADD_BOOK'
 export const UPDATE_BOOK = 'UPDATE_BOOK'
 export const REMOVE_BOOK = 'REMOVE_BOOK'
-export const FETCH_BOOKS_START = 'FETCH_BOOKS_START'
+export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST'
 export const FETCH_BOOKS_RESPONSE = 'FETCH_BOOKS_RESPONSE'
+export const FETCH_BOOK_BY_ID_REQUEST = 'FETCH_BOOK_BY_ID_REQUEST'
+export const FETCH_BOOK_BY_ID_RESPONSE = 'FETCH_BOOK_BY_ID_RESPONSE'
 
 export function handleBorrow(userId: number, bookId: number) {
   return {
@@ -26,7 +29,7 @@ export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     const books = getState().books.books
     const id = books.slice(-1)[0].id + 1
-    return dispatch(handleAddComplete({ ...book, id, status: 'available' }))
+    return dispatch(handleAddComplete({ ...book, id, status: 'AVAILABLE' }))
   }
 }
 export function handleAddComplete(book: Book) {
@@ -56,13 +59,25 @@ export function handleRemoveComplete(book: Book) {
 }
 export function fetchBooksRequest() {
   return {
-    type: FETCH_BOOKS_START
+    type: FETCH_BOOKS_REQUEST
   }
 }
 export function fetchBooksResponse(books: JsonBook[]) {
   return {
     type: FETCH_BOOKS_RESPONSE,
     payload: books.map(jsonBookToBook)
+  }
+}
+
+export function fetchBookByIdRequest() {
+  return {
+    type: FETCH_BOOK_BY_ID_REQUEST
+  }
+}
+export function fetchBookByIdResponse(book: JsonBook) {
+  return {
+    type: FETCH_BOOK_BY_ID_RESPONSE,
+    payload: jsonBookToBook(book)
   }
 }
 export function initBooks() {
@@ -81,22 +96,29 @@ export const getAllBooks = () => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     //thunk function
     dispatch(fetchBooksRequest()) // call action creator, start loading
-    const response = await fetch('/data/books.json')
-    const data = await response.json()
+    const response = await books.getAll()
+    const { data } = response
     console.log('got books', data)
     return dispatch(fetchBooksResponse(data)) //call action creator, show results
   }
 }
 
-function bookStatus(status: string): 'available' | 'borrowed' {
-  return status === 'available' ? 'available' : 'borrowed'
+export const getBookById = (id: string) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    //thunk function
+    dispatch(fetchBookByIdRequest()) // call action creator, start loading
+    const response = await books.getById(id)
+    const { data } = response
+    console.log('got book by id', id, data)
+    return dispatch(fetchBookByIdResponse(data)) //call action creator, show results
+  }
 }
 
 function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,
-    status: bookStatus(book.status),
+    publishedDate: book.publishedDate.slice(0, 4),
     borrowDate: book.borrowDate ? new Date(book.borrowDate) : undefined,
-    returnDate: book.returnDate ? new Date(book.returnDate) : undefined
+    returnByDate: book.returnByDate ? new Date(book.returnByDate) : undefined
   }
 }

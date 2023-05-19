@@ -29,7 +29,7 @@ const UpdateBook = () => {
         ...values,
         id: bookForUpdate.id,
         status: bookForUpdate.status,
-        cover: bookForUpdate.cover
+        cover: bookForUpdate.bookCoverLink
       }
 
       navigate(`/bookInfo/${bookForUpdate.id}`)

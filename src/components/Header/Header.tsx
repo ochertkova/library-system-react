@@ -104,7 +104,7 @@ const getPages = ({ isAuthenticated, user }: UserState) => {
   if (!isAuthenticated) {
     return visitorPages
   }
-  if (user?.isAdmin) {
+  if (user?.role === 'ADMIN') {
     return adminPages
   }
   return userPages
@@ -259,7 +259,7 @@ const Header = () => {
                     <Typography textAlign="center">Log out</Typography>
                   </MenuItem>
                 </Menu>
-                {userState.user?.isAdmin && (
+                {userState.user?.role === 'ADMIN' && (
                   <AdminPanelSettingsIcon
                     sx={{
                       position: 'relative',

@@ -13,9 +13,12 @@ import {
 } from '@mui/material'
 import BookIcon from '@mui/icons-material/Book'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getBookById } from '../../redux/actions/book'
+import { AppDispatch } from '../../redux/store'
 
 interface Column {
-  id: 'cover' | 'ISBN' | 'title' | 'authors' | 'status'
+  id: 'bookCoverLink' | 'isbn' | 'title' | 'authors' | 'status'
   label: string
   minWidth?: number
   align?: 'right'
@@ -24,8 +27,13 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'cover', label: 'Cover', minWidth: 170, sx: { display: { xs: 'none', md: 'block' } } },
-  { id: 'ISBN', label: 'ISBN', minWidth: 100 },
+  {
+    id: 'bookCoverLink',
+    label: 'Cover',
+    minWidth: 170,
+    sx: { display: { xs: 'none', md: 'block' } }
+  },
+  { id: 'isbn', label: 'ISBN', minWidth: 100 },
   { id: 'title', label: 'Title', minWidth: 100 },
   { id: 'authors', label: 'Authors', minWidth: 100 },
   { id: 'status', label: 'Status', minWidth: 100 }
@@ -36,6 +44,7 @@ interface ContentTableProps {
 }
 
 export default function ContentTable({ books }: ContentTableProps) {
+  const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -76,11 +85,14 @@ export default function ContentTable({ books }: ContentTableProps) {
                   role="checkbox"
                   tabIndex={-1}
                   key={row.id}
-                  onClick={() => navigate(`/bookInfo/${row.id}`)}>
+                  onClick={() => {
+                    dispatch(getBookById(row.id))
+                    navigate(`/bookInfo/${row.id}`)
+                  }}>
                   {columns.map((column) => {
                     const value = row[column.id]
-                    if (column.id === 'cover') {
-                      if (row.cover) {
+                    if (column.id === 'bookCoverLink') {
+                      if (row.bookCoverLink) {
                         return (
                           <TableCell
                             key={column.id}
@@ -93,7 +105,7 @@ export default function ContentTable({ books }: ContentTableProps) {
                                 maxHeight: { xs: 100, md: 120 }
                               }}
                               alt="Book cover"
-                              src={row.cover}
+                              src={row.bookCoverLink}
                             />
                           </TableCell>
                         )

@@ -1,47 +1,63 @@
 type User = {
   id: number
   name: string
-  isAdmin: boolean
+  email: string
+  password: string
+  loans?: string
+}
+
+type LoggedInUserInfo = {
+  token: string
+  name: string
+  role: 'USER' | 'ADMIN'
 }
 
 type UserState = {
-  user?: User
+  user?: LoggedInUserInfo
   isAuthenticated: boolean
+  isLoggingIn: boolean
+  errorMessage?: string | undefined
 }
 
 type BooksState = {
   isLoading: boolean
   books: Book[]
+  activeBook: Book | undefined
 }
 
 type Book = {
-  id: number
-  cover?: string
-  ISBN: string
+  id: string
+  bookCoverLink?: string
+  isbn: string
   title: string
   description: string
   publisher: string
   authors: string
-  status: 'available' | 'borrowed'
+  status: 'AVAILABLE' | 'BORROWED'
   borrowerId?: number
   publishedDate: string
   borrowDate?: Date
-  returnDate?: Date
+  returnByDate?: Date
 }
 
 type JsonBook = {
-  id: number
-  cover: string
-  ISBN: string
+  id: string
+  bookCoverLink: string
+  isbn: string
   title: string
   description: string
   publisher: string
   authors: string
-  status: string
+  status: 'AVAILABLE' | 'BORROWED'
   borrowerId?: number
   publishedDate: string
   borrowDate?: string
-  returnDate?: string
+  returnByDate?: string
+}
+
+type Author = {
+  id: string
+  name: string
 }
 
 type BookAction =
@@ -52,3 +68,10 @@ type BookAction =
   | ReturnType<typeof handleAdd>
   | ReturnType<typeof handleReturn>
   | ReturnType<typeof handleBorrow>
+
+type UserAction =
+  | ReturnType<typeof handleLogin>
+  | ReturnType<typeof loginRequest>
+  | ReturnType<typeof loginResponse>
+  | ReturnType<typeof loginError>
+  | ReturnType<typeof startLogin>

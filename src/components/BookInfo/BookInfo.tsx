@@ -1,10 +1,16 @@
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import BookIcon from '@mui/icons-material/Book'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import { AppDispatch, RootState } from '../../redux/store'
-import { handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
+import {
+  fetchBookByIdRequest,
+  getBookById,
+  handleBorrow,
+  handleRemove,
+  handleReturn
+} from '../../redux/actions/book'
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, user } = userState
@@ -12,10 +18,10 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
 
   if (!isAuthenticated || !user) return () => <></>
 
-  if (user?.isAdmin) {
+  if (user?.role === 'ADMIN') {
     return () => (
       <>
-        {book.status === 'borrowed' && (
+        {book.status === 'BORROWED' && (
           <>
             <Box>
               <>Borrowed: {book?.borrowDate?.toDateString()}</>
@@ -24,7 +30,7 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
               <>Borrower: {book?.borrowerId}</>
             </Box>
             <Box>
-              <>Return by date: {book?.returnDate?.toDateString()}</>
+              <>Return by date: {book?.returnByDate?.toDateString()}</>
             </Box>
           </>
         )}
@@ -41,25 +47,28 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
       </>
     )
   }
-  const onClickBorrow = () => dispatch(handleBorrow(user.id, book.id))
-  const onClickReturn = () => dispatch(handleReturn(user.id, book.id))
+  // const onClickBorrow = () => dispatch(handleBorrow(user.id, book.id))
+  // const onClickReturn = () => dispatch(handleReturn(user.id, book.id))
+
+  const onClickBorrow = () => console.log('borrowing book', book.id)
+  const onClickReturn = () => console.log('returning book', book.id)
 
   return () => (
     <>
-      {book.status === 'available' && (
+      {book.status === 'AVAILABLE' && (
         <>
           <Button variant="contained" sx={{ marginTop: 2 }} onClick={onClickBorrow}>
             Borrow
           </Button>
         </>
       )}
-      {book.status === 'borrowed' && book.borrowerId === user?.id && (
+      {book.status === 'BORROWED' && book.borrowerId === user?.id && (
         <>
           <Box>
             <>Borrowed: {book?.borrowDate?.toDateString()}</>
           </Box>
           <Box>
-            <>Return by date: {book?.returnDate?.toDateString()}</>
+            <>Return by date: {book?.returnByDate?.toDateString()}</>
           </Box>
           <Button variant="contained" sx={{ marginTop: 2 }} onClick={onClickReturn}>
             Return
@@ -72,14 +81,22 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
 
 const BookInfo = () => {
   const userState = useSelector((state: RootState) => state.user)
-  const booksState = useSelector((state: RootState) => state.books)
+  const { id = '' } = useParams()
+  const [isLoading, book] = useSelector((state: RootState) => [
+    state.books.isLoading,
+    state.books.activeBook
+  ])
   const dispatch: AppDispatch = useDispatch()
-  const bookId = Number(useParams().id)
 
-  const book = booksState.books.find((b: Book) => b.id === bookId)
+  if (isLoading) {
+    return <Typography>Loading book...</Typography>
+  } else if (book === undefined) {
+    dispatch(getBookById(id))
+    return <Typography>Loading book...</Typography>
+  }
 
   let cover = <BookIcon sx={{ fontSize: '80px', color: 'grey' }} />
-  if (book.cover) {
+  if (book.bookCoverLink) {
     cover = (
       <Box
         component="img"
@@ -90,7 +107,7 @@ const BookInfo = () => {
           display: { xs: 'none', md: 'block' }
         }}
         alt="Book cover"
-        src={book?.cover}
+        src={book?.bookCoverLink}
       />
     )
   }
@@ -124,10 +141,10 @@ const BookInfo = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={12}>
-              <Box>{book?.authors}</Box>
+              <Box>{book?.authors.map((author: Author) => author.name)}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
-              <Box>ISBN:{book?.ISBN}</Box>
+              <Box>ISBN:{book?.isbn}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
               <Box>

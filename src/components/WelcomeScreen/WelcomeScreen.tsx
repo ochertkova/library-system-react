@@ -1,17 +1,26 @@
 import { Box, Button, Typography } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { handleLogin, handleLogout } from '../../redux/actions/user'
+import { handleLogout } from '../../redux/actions/user'
+import SignIn from '../Auth/SignIn'
+import { RootState } from '../../redux/store'
 
 function WelcomeScreen() {
   const dispatch = useDispatch()
+
+  const { isAuthenticated, user } = useSelector((store: RootState) => store.user)
 
   return (
     <Typography component="div" textAlign={'center'}>
       <Box>
         <Box sx={{ p: 3 }}>
-          <h3>Welcome to Library System</h3>
+          <h3>Welcome to Library System{isAuthenticated && `, ${user.name}!`}</h3>
         </Box>
+        {!isAuthenticated && (
+          <Box sx={{ p: 3 }}>
+            <SignIn />
+          </Box>
+        )}
         <Box
           sx={{
             flexGrow: 1,
@@ -21,24 +30,14 @@ function WelcomeScreen() {
             justifyContent: 'space-between',
             p: 3
           }}>
-          <Button
-            sx={{ width: { md: '400px', xs: 1 }, p: 2, m: 2 }}
-            variant="contained"
-            onClick={() => dispatch(handleLogin(1))}>
-            Log in as User
-          </Button>
-          <Button
-            sx={{ width: { md: '400px', xs: 1 }, p: 2, m: 2 }}
-            variant="contained"
-            onClick={() => dispatch(handleLogin(2))}>
-            Log in as Admin
-          </Button>
-          <Button
-            sx={{ width: { md: '400px', xs: 1 }, p: 2, m: 2 }}
-            variant="contained"
-            onClick={() => dispatch(handleLogout())}>
-            Log out
-          </Button>
+          {isAuthenticated && (
+            <Button
+              sx={{ width: { md: '400px', xs: 1 }, p: 2, m: 2 }}
+              variant="contained"
+              onClick={() => dispatch(handleLogout())}>
+              Log out
+            </Button>
+          )}
         </Box>
       </Box>
     </Typography>
