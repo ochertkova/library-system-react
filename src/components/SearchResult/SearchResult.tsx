@@ -1,38 +1,31 @@
 import { Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { RootState } from '../../redux/store'
+import { AppDispatch, RootState } from '../../redux/store'
 import ContentTable from '../ContentTable/ContentTable'
-
-function bookMatches(book: Book, searchText: string | undefined) {
-  if (!searchText) return false
-  const searchTextLowerCase = searchText.toLowerCase()
-
-  if (book.title.toLowerCase().includes(searchTextLowerCase)) return true
-  if (book.authors.toLowerCase().includes(searchTextLowerCase)) return true
-  if (book.ISBN.includes(searchTextLowerCase)) return true
-  if (book.description.includes(searchTextLowerCase)) return true
-  if (book.publisher.includes(searchTextLowerCase)) return true
-
-  return false
-}
+import { searchBooks } from '../../redux/actions/book'
 
 export default function SearchResult() {
-  const { isLoading, books } = useSelector((state: RootState) => state.books)
-  const { searchText } = useParams()
+  const dispatch: AppDispatch = useDispatch()
+  const { isLoading, searchText, searchResult } = useSelector((state: RootState) => state.books)
+  const { searchTextParam = '' } = useParams()
+
+  if (searchText !== searchTextParam) {
+    // dispatch search if the prosess is not running (reducer state doesnt contain the search parameter)
+    // this happens when the search page is reloaded with Ctrl+R, for instance
+    dispatch(searchBooks(searchTextParam))
+  }
 
   if (isLoading) {
     return <Typography>Loading books....</Typography>
   }
-
-  const myBooks = books.filter((book: Book) => bookMatches(book, searchText))
   return (
     <>
       <Typography>
-        Search results for "{searchText}". {myBooks.length} books were found
+        Search results for "{searchText}". {searchResult.length} books were found
       </Typography>
-      <ContentTable books={myBooks} />
+      <ContentTable books={searchResult} />
     </>
   )
 }

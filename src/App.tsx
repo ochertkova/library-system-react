@@ -23,7 +23,7 @@ function App() {
           <Route path="/addBook" element={<AddBook />} />
           <Route path="/updateBook/:id" element={<UpdateBook />} />
           <Route path="/myLoans" element={<MyLoans />} />
-          <Route path="/search/:searchText" element={<SearchResult />} />
+          <Route path="/search/:searchTextParam" element={<SearchResult />} />
           <Route path="/" element={<WelcomeScreen />} />
         </Routes>
       </Typography>

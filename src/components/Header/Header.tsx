@@ -20,8 +20,9 @@ import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { RootState } from '../../redux/store'
+import { AppDispatch, RootState } from '../../redux/store'
 import { handleLogout } from '../../redux/actions/user'
+import { searchBooks } from '../../redux/actions/book'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -114,7 +115,7 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
   const userState = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const [searchText, setSearchText] = React.useState<string>('')
 
@@ -228,6 +229,7 @@ const Header = () => {
                 onKeyPress={(e) => {
                   if (e.code === 'Enter') {
                     setSearchText('')
+                    dispatch(searchBooks(searchText))
                     navigate('/search/' + searchText)
                   }
                 }}

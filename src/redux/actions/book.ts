@@ -12,6 +12,8 @@ export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST'
 export const FETCH_BOOKS_RESPONSE = 'FETCH_BOOKS_RESPONSE'
 export const FETCH_BOOK_BY_ID_REQUEST = 'FETCH_BOOK_BY_ID_REQUEST'
 export const FETCH_BOOK_BY_ID_RESPONSE = 'FETCH_BOOK_BY_ID_RESPONSE'
+export const SEARCH_BOOKS_REQUEST = 'SEARCH_BOOKS_REQUEST'
+export const SEARCH_BOOKS_RESPONSE = 'SEARCH_BOOKS_RESPONSE'
 
 export function handleBorrow(userId: number, bookId: number) {
   return {
@@ -80,6 +82,19 @@ export function fetchBookByIdResponse(book: JsonBook) {
     payload: jsonBookToBook(book)
   }
 }
+
+export function searchBooksRequest(searchText: string) {
+  return {
+    type: SEARCH_BOOKS_REQUEST,
+    payload: searchText
+  }
+}
+export function searchBooksResponse(searchResult: JsonBook[]) {
+  return {
+    type: SEARCH_BOOKS_RESPONSE,
+    payload: searchResult.map(jsonBookToBook)
+  }
+}
 export function initBooks() {
   // action creator
   return (dispatch: AppDispatch, getState: () => RootState) => {
@@ -111,6 +126,15 @@ export const getBookById = (id: string) => {
     const { data } = response
     console.log('got book by id', id, data)
     return dispatch(fetchBookByIdResponse(data)) //call action creator, show results
+  }
+}
+
+export const searchBooks = (search: string) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(searchBooksRequest(search))
+    const response = await books.searchBooks(search)
+    const { data } = response
+    return dispatch(searchBooksResponse(data))
   }
 }
 

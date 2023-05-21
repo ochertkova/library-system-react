@@ -23,6 +23,8 @@ type BooksState = {
   isLoading: boolean
   books: Book[]
   activeBook: Book | undefined
+  searchText: string | undefined
+  searchResult: Book[]
 }
 
 type Book = {

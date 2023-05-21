@@ -8,10 +8,18 @@ import {
   FETCH_BOOK_BY_ID_RESPONSE,
   REMOVE_BOOK,
   RETURN_BOOK,
-  UPDATE_BOOK
+  UPDATE_BOOK,
+  SEARCH_BOOKS_REQUEST,
+  SEARCH_BOOKS_RESPONSE
 } from '../actions/book'
 
-const initialState = { isLoading: false, books: [], activeBook: undefined }
+const initialState = {
+  isLoading: false,
+  books: [],
+  activeBook: undefined,
+  searchText: undefined,
+  searchResult: []
+}
 export default function bookReducer(state: BooksState = initialState, action: BookAction) {
   switch (action.type) {
     case FETCH_BOOKS_REQUEST:
@@ -37,7 +45,6 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         isLoading: false,
         activeBook: action.payload
       }
-
     case BORROW_BOOK:
       return {
         ...state,
@@ -102,6 +109,19 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         ...state,
         isLoading: false,
         books: updatedBooks
+      }
+    case SEARCH_BOOKS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        searchResult: [],
+        searchText: action.payload
+      }
+    case SEARCH_BOOKS_RESPONSE:
+      return {
+        ...state,
+        isLoading: false,
+        searchResult: action.payload
       }
     default:
       return state

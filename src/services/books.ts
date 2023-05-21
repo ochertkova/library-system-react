@@ -16,7 +16,13 @@ const getAll = () => {
 const getById = (id: String) => {
   return axios.get(`${baseUrl}/${id}`)
 }
+
+const searchBooks = (search: string) => {
+  return axios.get(baseUrl, { params: { search } })
+}
+
 export default {
   getAll,
-  getById
+  getById,
+  searchBooks
 }
