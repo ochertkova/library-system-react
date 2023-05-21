@@ -1,6 +1,6 @@
 import { Box, TextField, Button, Stack, FormControl, Typography } from '@mui/material'
 import * as Yup from 'yup'
-import { ErrorMessage, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +11,10 @@ const SignIn = () => {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
 
-  const isLoggingIn = useSelector((state: RootState) => state.user.isLoggingIn)
+  const [isLoggingIn, errorMessage] = useSelector((state: RootState) => [
+    state.user.isLoggingIn,
+    state.user.errorMessage
+  ])
 
   const formik = useFormik({
     initialValues: {
@@ -41,6 +44,7 @@ const SignIn = () => {
         alignItems: 'center'
       }}>
       <Box>Log in</Box>
+      {errorMessage && <Typography color={'red'}>{errorMessage}</Typography>}
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2}>
           <FormControl>

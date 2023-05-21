@@ -24,7 +24,7 @@ export default function userReducer(state: UserState = initialState, action: Use
     }
     case LOGIN_ERROR: {
       return {
-        isAuthenticated: true,
+        isAuthenticated: false,
         isLoggingIn: false,
         user: undefined,
         errorMessage: action.payload.message

@@ -6,7 +6,7 @@ export const USER_LOGIN = 'USER_LOGIN'
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'LOGIN_RESPONSE'
-export const LOGIN_ERROR = 'LOGIN_RESPONSE'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
 
 export function handleLogin(payload: LoggedInUserInfo) {
   return {
