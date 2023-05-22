@@ -101,7 +101,7 @@ const visitorPages = [
     path: '/catalog'
   }
 ]
-const getPages = ({ isAuthenticated, user }: UserState) => {
+const getPages = ({ isAuthenticated, loggedInUser: user }: UserState) => {
   if (!isAuthenticated) {
     return visitorPages
   }
@@ -241,7 +241,7 @@ const Header = () => {
               <Typography>
                 Logged in as
                 <MuiLink sx={{ color: 'white', p: 1 }} onClick={handleOpenUserMenu}>
-                  {userState.user?.name}
+                  {userState.loggedInUser?.name}
                 </MuiLink>
                 <Menu
                   id="menu-appbar"
@@ -261,7 +261,7 @@ const Header = () => {
                     <Typography textAlign="center">Log out</Typography>
                   </MenuItem>
                 </Menu>
-                {userState.user?.role === 'ADMIN' && (
+                {userState.loggedInUser?.role === 'ADMIN' && (
                   <AdminPanelSettingsIcon
                     sx={{
                       position: 'relative',

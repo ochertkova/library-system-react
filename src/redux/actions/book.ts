@@ -2,6 +2,7 @@ import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
 
 import { AppDispatch, RootState } from '../store'
 import books from '../../services/books'
+import myAccount from '../../services/myAccount'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
 export const RETURN_BOOK = 'RETURN_BOOK'
@@ -14,6 +15,8 @@ export const FETCH_BOOK_BY_ID_REQUEST = 'FETCH_BOOK_BY_ID_REQUEST'
 export const FETCH_BOOK_BY_ID_RESPONSE = 'FETCH_BOOK_BY_ID_RESPONSE'
 export const SEARCH_BOOKS_REQUEST = 'SEARCH_BOOKS_REQUEST'
 export const SEARCH_BOOKS_RESPONSE = 'SEARCH_BOOKS_RESPONSE'
+export const MY_LOANS_REQUEST = 'MY_LOANS_REQUEST'
+export const MY_LOANS_RESPONSE = 'MY_LOANS_RESPONSE'
 
 export function handleBorrow(userId: number, bookId: number) {
   return {
@@ -95,6 +98,18 @@ export function searchBooksResponse(searchResult: JsonBook[]) {
     payload: searchResult.map(jsonBookToBook)
   }
 }
+
+export function myLoansRequest() {
+  return {
+    type: MY_LOANS_REQUEST
+  }
+}
+export function myLoansResponse(myLoans: JsonLoan[]) {
+  return {
+    type: MY_LOANS_RESPONSE,
+    payload: myLoans.map(jsonLoanToLoan)
+  }
+}
 export function initBooks() {
   // action creator
   return (dispatch: AppDispatch, getState: () => RootState) => {
@@ -138,11 +153,29 @@ export const searchBooks = (search: string) => {
   }
 }
 
+export const myLoans = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(myLoansRequest())
+    const { token } = getState().user.loggedInUser
+    const response = await myAccount.myLoans(token)
+    const { data } = response
+    return dispatch(myLoansResponse(data))
+  }
+}
+
 function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,
     publishedDate: book.publishedDate.slice(0, 4),
     borrowDate: book.borrowDate ? new Date(book.borrowDate) : undefined,
     returnByDate: book.returnByDate ? new Date(book.returnByDate) : undefined
+  }
+}
+function jsonLoanToLoan(jsonLoan: JsonLoan): Loan {
+  return {
+    book: jsonBookToBook(jsonLoan.book),
+    borrowDate: new Date(jsonLoan.borrowDate),
+    returnByDate: new Date(jsonLoan.returnByDate),
+    returnedDate: jsonLoan.returnedDate ? new Date(jsonLoan.returnedDate) : undefined
   }
 }

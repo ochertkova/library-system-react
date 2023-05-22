@@ -7,7 +7,7 @@ import AuthTabs from './AuthTabs'
 
 function WelcomeScreen() {
   const dispatch = useDispatch()
-  const { isAuthenticated, user } = useSelector((store: RootState) => store.user)
+  const { isAuthenticated, loggedInUser: user } = useSelector((store: RootState) => store.user)
 
   return (
     <Typography component="div" textAlign={'center'}>
@@ -15,7 +15,17 @@ function WelcomeScreen() {
         <Box sx={{ p: 3 }}>
           <h3>Welcome to Library System{isAuthenticated && `, ${user.name}!`}</h3>
         </Box>
-        {!isAuthenticated && <AuthTabs />}
+        <Box
+          sx={{
+            flexGrow: 1,
+            alignItems: 'center',
+            display: { xs: 'flex', md: 'flex' },
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            p: 3
+          }}>
+          {!isAuthenticated && <AuthTabs />}
+        </Box>
         <Box
           sx={{
             flexGrow: 1,

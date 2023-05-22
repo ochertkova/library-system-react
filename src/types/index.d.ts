@@ -13,7 +13,7 @@ type LoggedInUserInfo = {
 }
 
 type UserState = {
-  user?: LoggedInUserInfo
+  loggedInUser?: LoggedInUserInfo
   isAuthenticated: boolean
   isLoggingIn: boolean
   errorMessage?: string | undefined
@@ -25,6 +25,21 @@ type BooksState = {
   activeBook: Book | undefined
   searchText: string | undefined
   searchResult: Book[]
+  loans: Loan[] | undefined
+}
+
+type Loan = {
+  borrowDate: Date
+  returnByDate: Date
+  returnedDate?: Date
+  book: Book
+}
+
+type JsonLoan = {
+  borrowDate: string
+  returnByDate: string
+  returnedDate?: string
+  book: JsonBook
 }
 
 type Book = {

@@ -10,7 +10,9 @@ import {
   RETURN_BOOK,
   UPDATE_BOOK,
   SEARCH_BOOKS_REQUEST,
-  SEARCH_BOOKS_RESPONSE
+  SEARCH_BOOKS_RESPONSE,
+  MY_LOANS_REQUEST,
+  MY_LOANS_RESPONSE
 } from '../actions/book'
 
 const initialState = {
@@ -18,7 +20,8 @@ const initialState = {
   books: [],
   activeBook: undefined,
   searchText: undefined,
-  searchResult: []
+  searchResult: [],
+  loans: undefined
 }
 export default function bookReducer(state: BooksState = initialState, action: BookAction) {
   switch (action.type) {
@@ -122,6 +125,18 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         ...state,
         isLoading: false,
         searchResult: action.payload
+      }
+    case MY_LOANS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        loans: undefined
+      }
+    case MY_LOANS_RESPONSE:
+      return {
+        ...state,
+        isLoading: false,
+        loans: action.payload
       }
     default:
       return state

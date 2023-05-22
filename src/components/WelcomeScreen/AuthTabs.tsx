@@ -14,12 +14,12 @@ function AuthTabs() {
     setValue(newValue)
   }
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: { md: '400px', xs: 1 }, typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
+          <TabList onChange={handleChange} aria-label="Authentication tabs">
+            <Tab label="LOG IN" value="1" />
+            <Tab label="SIGN UP" value="2" />
           </TabList>
         </Box>
         <TabPanel value="1">

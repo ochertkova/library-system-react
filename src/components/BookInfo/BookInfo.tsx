@@ -13,7 +13,7 @@ import {
 } from '../../redux/actions/book'
 
 function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
-  const { isAuthenticated, user } = userState
+  const { isAuthenticated, loggedInUser: user } = userState
   const onClickRemove = () => dispatch(handleRemove(book))
 
   if (!isAuthenticated || !user) return () => <></>

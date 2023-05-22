@@ -97,7 +97,7 @@ const SignUp = () => {
             />
           </FormControl>
           <Button variant="contained" type="submit">
-            Log in
+            Sign up
           </Button>
         </Stack>
       </Box>

@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   isAuthenticated: false,
-  user: undefined,
+  loggedInUser: undefined,
   isLoggingIn: false,
   errorMessage: undefined
 }
@@ -21,7 +21,7 @@ export default function userReducer(state: UserState = initialState, action: Use
         ...state,
         isAuthenticated: false,
         isLoggingIn: true,
-        user: undefined
+        loggedInUser: undefined
       }
     }
     case LOGIN_RESPONSE: {
@@ -29,14 +29,14 @@ export default function userReducer(state: UserState = initialState, action: Use
         ...state,
         isAuthenticated: true,
         isLoggingIn: false,
-        user: action.payload
+        loggedInUser: action.payload
       }
     }
     case LOGIN_ERROR: {
       return {
         isAuthenticated: false,
         isLoggingIn: false,
-        user: undefined,
+        loggedInUser: undefined,
         errorMessage: action.payload.message
       }
     }
