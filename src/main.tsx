@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
 import { store } from './redux/store'
 import { initBooks } from './redux/actions/book'
+import { initUser } from './redux/actions/user'
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,10 @@ const theme = createTheme({
 })
 
 store.dispatch(initBooks())
+
+if (window.localStorage.getItem('loggedInLibraryUser') != null) {
+  store.dispatch(initUser())
+}
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

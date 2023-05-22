@@ -1,4 +1,3 @@
-import axios from 'axios'
 import auth from '../../services/auth'
 import { AppDispatch, RootState } from '../store'
 
@@ -8,13 +7,32 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'LOGIN_RESPONSE'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 
+export function initUser() {
+  // action creator
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    //thunk function
+    const loggedUserJSON = window.localStorage.getItem('loggedInLibraryUser')
+    if (loggedUserJSON) {
+      const storedUserInfo = JSON.parse(loggedUserJSON)
+      const userinfoResponse = await auth.checkToken(storedUserInfo.token)
+      if (userinfoResponse.status === 200) {
+        const { data } = userinfoResponse
+        return dispatch(loginResponse(data.body))
+      }
+    }
+    return Promise.resolve()
+  }
+}
+
+/*
 export function handleLogin(payload: LoggedInUserInfo) {
   return {
     type: USER_LOGIN,
     payload
   }
-}
+} */
 export function handleLogout() {
+  window.localStorage.removeItem('loggedInLibraryUser')
   return {
     type: USER_LOGOUT
   }
@@ -45,6 +63,7 @@ export function startLogin(username: string, password: string) {
     dispatch(loginRequest())
     const response = await auth.login(username, password)
     if (response.status == 200) {
+      window.localStorage.setItem('loggedInLibraryUser', JSON.stringify(response.data))
       dispatch(loginResponse(response.data))
     } else {
       dispatch(loginError(response.data))
