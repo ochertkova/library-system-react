@@ -1,11 +1,13 @@
 import auth from '../../services/auth'
 import { AppDispatch, RootState } from '../store'
 
-export const USER_LOGIN = 'USER_LOGIN'
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'LOGIN_RESPONSE'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
+export const SIGNUP_RESPONSE = 'SIGNUP_RESPONSE'
+export const SIGNUP_ERROR = 'SIGNUP_ERROR'
 
 export function initUser() {
   // action creator
@@ -24,13 +26,6 @@ export function initUser() {
   }
 }
 
-/*
-export function handleLogin(payload: LoggedInUserInfo) {
-  return {
-    type: USER_LOGIN,
-    payload
-  }
-} */
 export function handleLogout() {
   window.localStorage.removeItem('loggedInLibraryUser')
   return {
@@ -58,6 +53,25 @@ export function loginError(payload: object) {
   }
 }
 
+export function signupRequest() {
+  return {
+    type: SIGNUP_REQUEST
+  }
+}
+
+export function signupResponse(payload: LoggedInUserInfo) {
+  return {
+    type: SIGNUP_RESPONSE,
+    payload
+  }
+}
+
+export function signupError(payload: object) {
+  return {
+    type: SIGNUP_ERROR,
+    payload
+  }
+}
 export function startLogin(username: string, password: string) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     dispatch(loginRequest())
@@ -67,6 +81,18 @@ export function startLogin(username: string, password: string) {
       dispatch(loginResponse(response.data))
     } else {
       dispatch(loginError(response.data))
+    }
+  }
+}
+
+export function startSignUp(name: string, username: string, email: string, password: string) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(signupRequest())
+    const signupresponse = await auth.signUp(name, username, email, password)
+    if (signupresponse.status == 200) {
+      dispatch(startLogin(username, password))
+    } else {
+      dispatch(signupError(signupresponse.data))
     }
   }
 }

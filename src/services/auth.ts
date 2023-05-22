@@ -21,7 +21,14 @@ const login = (username: string, password: string) => {
   const payload = { username, password }
   return axios.post(`${baseUrl}/signin`, payload).catch((err) => err.response)
 }
+
+const signUp = (name: string, username: string, email: string, password: string) => {
+  const payload = { name, username, email, password }
+  return axios.post(`${baseUrl}/signup`, payload).catch((err) => err.response)
+}
+
 export default {
   login,
-  checkToken
+  checkToken,
+  signUp
 }
