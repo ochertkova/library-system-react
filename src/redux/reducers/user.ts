@@ -3,8 +3,6 @@ import {
   LOGIN_REQUEST,
   LOGIN_RESPONSE,
   USER_LOGOUT,
-  SIGNUP_REQUEST,
-  SIGNUP_RESPONSE,
   SIGNUP_ERROR
 } from '../actions/user'
 

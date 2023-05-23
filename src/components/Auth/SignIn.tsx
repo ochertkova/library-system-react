@@ -43,7 +43,9 @@ const SignIn = () => {
       sx={{
         alignItems: 'center'
       }}>
-      <Box>Log in</Box>
+      <Box>
+        <Typography>Log in</Typography>
+      </Box>
       {errorMessage && <Typography color={'red'}>{errorMessage}</Typography>}
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2}>

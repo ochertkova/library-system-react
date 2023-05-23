@@ -25,13 +25,13 @@ const borrowBook = (id: string, token: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   }
-  return axios.post(`${baseUrl}/${id}/borrow`, {}, config).catch((err) => err.respose)
+  return axios.post(`${baseUrl}/${id}/borrow`, {}, config).catch((err) => err.response)
 }
 const returnBook = (id: string, token: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   }
-  return axios.post(`${baseUrl}/${id}/return`, {}, config).catch((err) => err.respose)
+  return axios.post(`${baseUrl}/${id}/return`, {}, config).catch((err) => err.response)
 }
 
 export default {
