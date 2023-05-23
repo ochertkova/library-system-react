@@ -13,7 +13,7 @@ const getAll = () => {
 //   return axios.put(`${baseUrl}/${id}`, newObject)
 // }
 
-const getById = (id: String) => {
+const getById = (id: string) => {
   return axios.get(`${baseUrl}/${id}`)
 }
 
@@ -21,8 +21,23 @@ const searchBooks = (search: string) => {
   return axios.get(baseUrl, { params: { search } })
 }
 
+const borrowBook = (id: string, token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+  return axios.post(`${baseUrl}/${id}/borrow`, {}, config).catch((err) => err.respose)
+}
+const returnBook = (id: string, token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+  return axios.post(`${baseUrl}/${id}/return`, {}, config).catch((err) => err.respose)
+}
+
 export default {
   getAll,
   getById,
-  searchBooks
+  searchBooks,
+  borrowBook,
+  returnBook
 }

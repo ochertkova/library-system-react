@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
 import { store } from './redux/store'
-import { initBooks } from './redux/actions/book'
 import { initUser } from './redux/actions/user'
 
 const theme = createTheme({
@@ -17,8 +16,6 @@ const theme = createTheme({
     action: {}
   }
 })
-
-store.dispatch(initBooks())
 
 if (window.localStorage.getItem('loggedInLibraryUser') != null) {
   store.dispatch(initUser())

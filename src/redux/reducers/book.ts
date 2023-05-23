@@ -12,7 +12,8 @@ import {
   SEARCH_BOOKS_REQUEST,
   SEARCH_BOOKS_RESPONSE,
   MY_LOANS_REQUEST,
-  MY_LOANS_RESPONSE
+  MY_LOANS_RESPONSE,
+  BORROW_ERROR
 } from '../actions/book'
 
 const initialState = {
@@ -47,43 +48,6 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         ...state,
         isLoading: false,
         activeBook: action.payload
-      }
-    case BORROW_BOOK:
-      return {
-        ...state,
-        isLoading: false,
-        books: state.books.map((book) => {
-          if (book.id === action.payload.bookId) {
-            const borrowDate = new Date()
-            const borrowedBook = {
-              ...book,
-              status: 'BORROWED',
-              borrowerId: action.payload.userId,
-              borrowDate,
-              returnDate: plusDays(borrowDate, 14)
-            }
-            return borrowedBook
-          }
-          return book
-        })
-      }
-    case RETURN_BOOK:
-      return {
-        ...state,
-        isLoading: false,
-        books: state.books.map((book) => {
-          if (book.id === action.payload.bookId) {
-            const returnedBook = {
-              ...book,
-              status: 'AVAILABLE',
-              borrowerId: null,
-              borrowDate: null,
-              returnDate: null
-            }
-            return returnedBook
-          }
-          return book
-        })
       }
     case REMOVE_BOOK:
       const updatedRemoveBooks = state.books.filter((book) => {
@@ -137,6 +101,11 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         ...state,
         isLoading: false,
         loans: action.payload
+      }
+    case BORROW_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload.message
       }
     default:
       return state

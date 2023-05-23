@@ -4,19 +4,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
 import { AppDispatch, RootState } from '../../redux/store'
-import {
-  fetchBookByIdRequest,
-  getBookById,
-  handleBorrow,
-  handleRemove,
-  handleReturn
-} from '../../redux/actions/book'
+import { getBookById, handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
+import { useEffect } from 'react'
 
-function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
+function getFunctions(userState: UserState, loans: Loan[], book: Book, dispatch: AppDispatch) {
   const { isAuthenticated, loggedInUser: user } = userState
   const onClickRemove = () => dispatch(handleRemove(book))
 
-  if (!isAuthenticated || !user) return () => <></>
+  if (!isAuthenticated || !user || !loans) return () => <></>
+
+  const myLoan: Loan | undefined = loans.find((loan: Loan) => loan.book.id === book.id)
 
   if (user?.role === 'ADMIN') {
     return () => (
@@ -47,11 +44,11 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
       </>
     )
   }
-  // const onClickBorrow = () => dispatch(handleBorrow(user.id, book.id))
-  // const onClickReturn = () => dispatch(handleReturn(user.id, book.id))
+  const onClickBorrow = () => dispatch(handleBorrow(book))
+  const onClickReturn = () => dispatch(handleReturn(book))
 
-  const onClickBorrow = () => console.log('borrowing book', book.id)
-  const onClickReturn = () => console.log('returning book', book.id)
+  // const onClickBorrow = () => console.log('borrowing book', book.id)
+  //const onClickReturn = () => console.log('returning book', book.id)
 
   return () => (
     <>
@@ -62,13 +59,13 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
           </Button>
         </>
       )}
-      {book.status === 'BORROWED' && book.borrowerId === user?.id && (
+      {myLoan && (
         <>
           <Box>
-            <>Borrowed: {book?.borrowDate?.toDateString()}</>
+            <>Borrowed: {myLoan.borrowDate.toDateString()}</>
           </Box>
           <Box>
-            <>Return by date: {book?.returnByDate?.toDateString()}</>
+            <>Return by date: {myLoan.returnByDate.toDateString()}</>
           </Box>
           <Button variant="contained" sx={{ marginTop: 2 }} onClick={onClickReturn}>
             Return
@@ -82,18 +79,20 @@ function getFunctions(userState: UserState, book: Book, dispatch: AppDispatch) {
 const BookInfo = () => {
   const userState = useSelector((state: RootState) => state.user)
   const { id = '' } = useParams()
-  const [isLoading, book] = useSelector((state: RootState) => [
-    state.books.isLoading,
-    state.books.activeBook
-  ])
+  const { isLoading, activeBook: book, loans } = useSelector((state: RootState) => state.books)
   const dispatch: AppDispatch = useDispatch()
 
-  if (isLoading) {
-    return <Typography>Loading book...</Typography>
-  } else if (book === undefined) {
-    dispatch(getBookById(id))
+  useEffect(() => {
+    if (!book) {
+      dispatch(getBookById(id))
+    }
+  }, [book])
+
+  if (isLoading || !book) {
     return <Typography>Loading book...</Typography>
   }
+
+  console.log('Rendering book info')
 
   let cover = <BookIcon sx={{ fontSize: '80px', color: 'grey' }} />
   if (book.bookCoverLink) {
@@ -112,7 +111,7 @@ const BookInfo = () => {
     )
   }
 
-  const ExtraFunctions = getFunctions(userState, book, dispatch)
+  const ExtraFunctions = getFunctions(userState, loans, book, dispatch)
 
   return (
     <Grid container direction="row" spacing={1} sx={{ p: 3 }}>

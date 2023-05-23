@@ -22,7 +22,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { AppDispatch, RootState } from '../../redux/store'
 import { handleLogout } from '../../redux/actions/user'
-import { searchBooks } from '../../redux/actions/book'
+import { getAllBooks, myLoans, searchBooks } from '../../redux/actions/book'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,37 +68,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const adminPages = [
   {
     label: 'Catalog',
-    viewName: 'catalog',
-    path: '/catalog'
+    path: '/catalog',
+    action: getAllBooks
   },
   {
     label: 'Add Author',
-    viewName: 'addAuthor',
     path: '/addAuthor'
   },
   {
     label: 'Add Book',
-    viewName: 'addBook',
     path: '/addBook'
   }
 ]
 const userPages = [
   {
     label: 'Catalog',
-    viewName: 'catalog',
-    path: '/catalog'
+    path: '/catalog',
+    action: getAllBooks
   },
   {
     label: 'My Loans',
-    viewName: 'myLoans',
-    path: '/myLoans'
+    path: '/myLoans',
+    action: myLoans
   }
 ]
 const visitorPages = [
   {
     label: 'Catalog',
-    viewName: 'catalog',
-    path: '/catalog'
+    path: '/catalog',
+    action: getAllBooks
   }
 ]
 const getPages = ({ isAuthenticated, loggedInUser: user }: UserState) => {
@@ -175,6 +173,9 @@ const Header = () => {
                   style={{ textDecoration: 'none', color: 'black' }}>
                   <MenuItem
                     onClick={() => {
+                      if (page.action) {
+                        dispatch(page.action())
+                      }
                       handleCloseNavMenu()
                     }}>
                     <Typography textAlign="center">{page.label}</Typography>
@@ -208,6 +209,9 @@ const Header = () => {
                 <Button
                   key={page.label}
                   onClick={() => {
+                    if (page.action) {
+                      dispatch(page.action())
+                    }
                     handleCloseNavMenu()
                   }}
                   sx={{ my: 2, color: 'white', display: 'block' }}>

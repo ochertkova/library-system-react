@@ -1,5 +1,6 @@
 import auth from '../../services/auth'
 import { AppDispatch, RootState } from '../store'
+import { myLoans } from './book'
 
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -19,7 +20,8 @@ export function initUser() {
       const userinfoResponse = await auth.checkToken(storedUserInfo.token)
       if (userinfoResponse.status === 200) {
         const { data } = userinfoResponse
-        return dispatch(loginResponse(data.body))
+        dispatch(loginResponse(data.body))
+        return dispatch(myLoans())
       }
     }
     return Promise.resolve()

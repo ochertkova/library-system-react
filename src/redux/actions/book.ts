@@ -5,7 +5,9 @@ import books from '../../services/books'
 import myAccount from '../../services/myAccount'
 
 export const BORROW_BOOK = 'BORROW_BOOK'
+export const BORROW_ERROR = 'BORROW_ERROR'
 export const RETURN_BOOK = 'RETURN_BOOK'
+export const RETURN_ERROR = 'RETURN_ERROR'
 export const ADD_BOOK = 'ADD_BOOK'
 export const UPDATE_BOOK = 'UPDATE_BOOK'
 export const REMOVE_BOOK = 'REMOVE_BOOK'
@@ -18,16 +20,29 @@ export const SEARCH_BOOKS_RESPONSE = 'SEARCH_BOOKS_RESPONSE'
 export const MY_LOANS_REQUEST = 'MY_LOANS_REQUEST'
 export const MY_LOANS_RESPONSE = 'MY_LOANS_RESPONSE'
 
-export function handleBorrow(userId: number, bookId: number) {
-  return {
-    type: BORROW_BOOK,
-    payload: { userId, bookId }
+export function handleBorrow(book: Book) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    const { token } = getState().user.loggedInUser
+    const response = await books.borrowBook(book.id, token)
+    if (response.status == 200) {
+      dispatch(myLoans())
+      dispatch(getBookById(book.id))
+    } else {
+      dispatch(borrowError(response.data))
+    }
   }
 }
-export function handleReturn(userId: number, bookId: number) {
-  return {
-    type: RETURN_BOOK,
-    payload: { userId, bookId }
+
+export function handleReturn(book: Book) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    const { token } = getState().user.loggedInUser
+    const response = await books.returnBook(book.id, token)
+    if (response.status == 200) {
+      dispatch(myLoans())
+      dispatch(getBookById(book.id))
+    } else {
+      dispatch(returnError(response.data))
+    }
   }
 }
 export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
@@ -118,7 +133,6 @@ export function initBooks() {
     if (books.books.length === 0) {
       return dispatch(getAllBooks())
     }
-    return Promise.resolve()
   }
 }
 export const getAllBooks = () => {
@@ -129,7 +143,7 @@ export const getAllBooks = () => {
     const response = await books.getAll()
     const { data } = response
     console.log('got books', data)
-    return dispatch(fetchBooksResponse(data)) //call action creator, show results
+    dispatch(fetchBooksResponse(data)) //call action creator, show results
   }
 }
 
@@ -140,7 +154,7 @@ export const getBookById = (id: string) => {
     const response = await books.getById(id)
     const { data } = response
     console.log('got book by id', id, data)
-    return dispatch(fetchBookByIdResponse(data)) //call action creator, show results
+    dispatch(fetchBookByIdResponse(data)) //call action creator, show results
   }
 }
 
@@ -149,7 +163,7 @@ export const searchBooks = (search: string) => {
     dispatch(searchBooksRequest(search))
     const response = await books.searchBooks(search)
     const { data } = response
-    return dispatch(searchBooksResponse(data))
+    dispatch(searchBooksResponse(data))
   }
 }
 
@@ -159,7 +173,20 @@ export const myLoans = () => {
     const { token } = getState().user.loggedInUser
     const response = await myAccount.myLoans(token)
     const { data } = response
-    return dispatch(myLoansResponse(data))
+    dispatch(myLoansResponse(data))
+  }
+}
+
+export function borrowError(payload: object) {
+  return {
+    type: BORROW_ERROR,
+    payload
+  }
+}
+export function returnError(payload: object) {
+  return {
+    type: RETURN_ERROR,
+    payload
   }
 }
 
