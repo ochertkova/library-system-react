@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:8080/api/v1/authors'
+const baseUrl = 'http://localhost:8080/api/v1/categories'
 
 const getAll = () => {
   return axios.get(baseUrl)

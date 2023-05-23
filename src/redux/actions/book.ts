@@ -119,10 +119,10 @@ export function myLoansRequest() {
     type: MY_LOANS_REQUEST
   }
 }
-export function myLoansResponse(myLoans: JsonLoan[]) {
+export function myLoansResponse(jsonLoans: JsonLoan[]) {
   return {
     type: MY_LOANS_RESPONSE,
-    payload: myLoans.map(jsonLoanToLoan)
+    payload: jsonLoans.map(jsonLoanToLoan)
   }
 }
 export function initBooks() {

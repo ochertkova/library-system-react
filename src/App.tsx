@@ -10,6 +10,7 @@ import MyLoans from './components/MyLoans/MyLoans'
 import SearchResult from './components/SearchResult/SearchResult'
 import UpdateBook from './components/UpdateBook/UpdateBook'
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
+import AddCategory from './components/AddCategory/AddCategory'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/bookInfo/:id" element={<BookInfo />} />
           <Route path="/addAuthor" element={<AddAuthor />} />
+          <Route path="/addCategory" element={<AddCategory />} />
           <Route path="/addBook" element={<AddBook />} />
           <Route path="/updateBook/:id" element={<UpdateBook />} />
           <Route path="/myLoans" element={<MyLoans />} />

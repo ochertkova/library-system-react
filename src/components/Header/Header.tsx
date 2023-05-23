@@ -76,6 +76,10 @@ const adminPages = [
     path: '/addAuthor'
   },
   {
+    label: 'Add Category',
+    path: '/addCategory'
+  },
+  {
     label: 'Add Book',
     path: '/addBook'
   }

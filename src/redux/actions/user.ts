@@ -21,7 +21,9 @@ export function initUser() {
       if (userinfoResponse.status === 200) {
         const { data } = userinfoResponse
         dispatch(loginResponse(data.body))
-        return dispatch(myLoans())
+        if (data.body.role === 'USER') {
+          dispatch(myLoans())
+        }
       }
     }
     return Promise.resolve()
