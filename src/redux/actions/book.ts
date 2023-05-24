@@ -15,6 +15,7 @@ export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
 export const UPDATE_BOOK_RESPONSE = 'UPDATE_BOOK_RESPONSE'
 export const UPDATE_BOOK_ERROR = 'UPDATE_BOOK_ERROR'
 export const REMOVE_BOOK = 'REMOVE_BOOK'
+export const REMOVE_BOOK_ERROR = 'REMOVE_BOOK_ERROR'
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST'
 export const FETCH_BOOKS_RESPONSE = 'FETCH_BOOKS_RESPONSE'
 export const FETCH_BOOK_BY_ID_REQUEST = 'FETCH_BOOK_BY_ID_REQUEST'
@@ -68,18 +69,6 @@ export function handleAdd(values: NewBookFormValues) {
     }
   }
 }
-/*
-export function handleUpdate(book: Book) {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    return dispatch(handleUpdateComplete(book))
-  }
-}
-export function handleUpdateComplete(book: Book) {
-  return {
-    type: UPDATE_BOOK,
-    payload: book
-  }
-}*/
 
 export function handleUpdate(id: string, values: UpdateBookFormValuesWithStatus) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -99,15 +88,16 @@ export function handleUpdate(id: string, values: UpdateBookFormValuesWithStatus)
     }
   }
 }
+
 export function handleRemove(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    return dispatch(handleRemoveComplete(book))
-  }
-}
-export function handleRemoveComplete(book: Book) {
-  return {
-    type: REMOVE_BOOK,
-    payload: book
+    const { token } = getState().user.loggedInUser
+    const response = await books.removeBook(book.id, token)
+    if (response.status == 200) {
+      dispatch(getAllBooks())
+    } else {
+      dispatch(removeBookError(response.data))
+    }
   }
 }
 export function fetchBooksRequest() {
@@ -258,7 +248,12 @@ export function updateBookError(payload: object) {
     payload
   }
 }
-
+export function removeBookError(payload: object) {
+  return {
+    type: REMOVE_BOOK_ERROR,
+    payload
+  }
+}
 function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,

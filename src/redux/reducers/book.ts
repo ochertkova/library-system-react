@@ -7,7 +7,6 @@ import {
   FETCH_BOOKS_REQUEST,
   FETCH_BOOK_BY_ID_REQUEST,
   FETCH_BOOK_BY_ID_RESPONSE,
-  REMOVE_BOOK,
   UPDATE_BOOK_REQUEST,
   UPDATE_BOOK_RESPONSE,
   UPDATE_BOOK_ERROR,
@@ -15,7 +14,8 @@ import {
   SEARCH_BOOKS_RESPONSE,
   MY_LOANS_REQUEST,
   MY_LOANS_RESPONSE,
-  BORROW_ERROR
+  BORROW_ERROR,
+  REMOVE_BOOK_ERROR
 } from '../actions/book'
 
 const initialState = {
@@ -51,16 +51,12 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         isLoading: false,
         activeBook: action.payload
       }
-    case REMOVE_BOOK:
-      const updatedRemoveBooks = state.books.filter((book) => {
-        return book.id !== action.payload.id
-      })
-      console.log(updatedRemoveBooks)
+    case REMOVE_BOOK_ERROR:
       return {
         ...state,
-        isLoading: false,
-        books: updatedRemoveBooks
+        errorMessage: action.payload.message
       }
+
     case ADD_BOOK_REQUEST:
       return {
         ...state,

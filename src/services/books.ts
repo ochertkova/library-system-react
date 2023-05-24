@@ -40,6 +40,13 @@ const updateBook = (id: string, payload: UpdatedBookJson, token: string) => {
   return axios.put(`${baseUrl}/${id}`, payload, config).catch((err) => err.response)
 }
 
+const removeBook = (id: string, token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+  return axios.delete(`${baseUrl}/${id}`, config).catch((err) => err.response)
+}
+
 export default {
   getAll,
   getById,
@@ -47,5 +54,6 @@ export default {
   borrowBook,
   returnBook,
   addBook,
-  updateBook
+  updateBook,
+  removeBook
 }
