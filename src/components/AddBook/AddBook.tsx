@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Stack, FormControl } from '@mui/material'
+import { Box, TextField, Button, Stack, FormControl, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
@@ -17,24 +17,33 @@ const AddBook = () => {
       authors: '',
       publisher: '',
       publishedDate: '',
-      description: ''
+      description: '',
+      bookCoverLink: '',
+      category: ''
     },
-    onSubmit: (values: Omit<Book, 'id' | 'status'>) => {
+    onSubmit: (values: NewBookFormValues) => {
       console.log(values)
       navigate('/catalog')
       return dispatch(handleAdd(values))
     },
     validationSchema: Yup.object({
-      ISBN: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),
+      isbn: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),
       title: Yup.string().required('Title is required'),
       authors: Yup.string().required('Authors is required'),
       publisher: Yup.string().required('Publisher is required'),
       publishedDate: Yup.string().required('Published date is required'),
-      description: Yup.string().required('Description is required')
+      description: Yup.string().required('Description is required'),
+      bookCoverLink: Yup.string(),
+      category: Yup.string()
     })
   })
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} padding={2}>
+      <Box>
+        <Typography variant="h5" sx={{ textAlign: 'center' }}>
+          Add book
+        </Typography>
+      </Box>
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>
@@ -42,7 +51,7 @@ const AddBook = () => {
               id="isbn"
               label="ISBN"
               variant="outlined"
-              {...formik.getFieldProps('ISBN')}
+              {...formik.getFieldProps('isbn')}
               error={Boolean(formik.errors.isbn && formik.touched.isbn)}
               helperText={formik.touched.isbn && formik.errors.isbn}
             />
@@ -93,6 +102,26 @@ const AddBook = () => {
               label="Description"
               variant="outlined"
               {...formik.getFieldProps('description')}
+              error={Boolean(formik.errors.description && formik.touched.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              id="bookCoverLink"
+              label="Book cover link"
+              variant="outlined"
+              {...formik.getFieldProps('bookCoverLink')}
+              error={Boolean(formik.errors.description && formik.touched.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              id="category"
+              label="Category"
+              variant="outlined"
+              {...formik.getFieldProps('category')}
               error={Boolean(formik.errors.description && formik.touched.description)}
               helperText={formik.touched.description && formik.errors.description}
             />

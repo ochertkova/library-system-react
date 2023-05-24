@@ -1,6 +1,8 @@
 import { plusDays } from '../../utils'
 import {
-  ADD_BOOK,
+  ADD_BOOK_REQUEST,
+  ADD_BOOK_RESPONSE,
+  ADD_BOOK_ERROR,
   BORROW_BOOK,
   FETCH_BOOKS_RESPONSE,
   FETCH_BOOKS_REQUEST,
@@ -59,11 +61,20 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         isLoading: false,
         books: updatedRemoveBooks
       }
-    case ADD_BOOK:
+    case ADD_BOOK_REQUEST:
       return {
         ...state,
-        isLoading: false,
-        books: [action.payload, ...state.books]
+        isLoading: true
+      }
+    case ADD_BOOK_RESPONSE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ADD_BOOK_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload.message
       }
     case UPDATE_BOOK:
       const updatedBooks = state.books.map((book) => {

@@ -44,7 +44,6 @@ type JsonLoan = {
 
 type Book = {
   id: string
-  bookCoverLink?: string
   isbn: string
   title: string
   description: string
@@ -53,8 +52,10 @@ type Book = {
   status: 'AVAILABLE' | 'BORROWED'
   borrowerId?: number
   publishedDate: string
+  category?: string
   borrowDate?: Date
   returnByDate?: Date
+  bookCoverLink?: string
 }
 
 type JsonBook = {
@@ -64,12 +65,25 @@ type JsonBook = {
   title: string
   description: string
   publisher: string
-  authors: string
+  authors: string[]
   status: 'AVAILABLE' | 'BORROWED'
-  borrowerId?: number
   publishedDate: string
+  category?: string
   borrowDate?: string
   returnByDate?: string
+}
+
+type NewBookJson = Omit<JsonBook, 'id'>
+
+type NewBookFormValues = {
+  bookCoverLink: string
+  isbn: string
+  title: string
+  description: string
+  publisher: string
+  authors: string
+  publishedDate: string
+  category: string
 }
 
 type Author = {

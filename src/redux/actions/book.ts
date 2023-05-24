@@ -8,7 +8,9 @@ export const BORROW_BOOK = 'BORROW_BOOK'
 export const BORROW_ERROR = 'BORROW_ERROR'
 export const RETURN_BOOK = 'RETURN_BOOK'
 export const RETURN_ERROR = 'RETURN_ERROR'
-export const ADD_BOOK = 'ADD_BOOK'
+export const ADD_BOOK_REQUEST = 'ADD_BOOK_REQUEST'
+export const ADD_BOOK_RESPONSE = 'ADD_BOOK_RESPONSE'
+export const ADD_BOOK_ERROR = 'ADD_BOOK_ERROR'
 export const UPDATE_BOOK = 'UPDATE_BOOK'
 export const REMOVE_BOOK = 'REMOVE_BOOK'
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST'
@@ -45,6 +47,7 @@ export function handleReturn(book: Book) {
     }
   }
 }
+/*
 export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     const books = getState().books.books
@@ -54,6 +57,26 @@ export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
 }
 export function handleAddComplete(book: Book) {
   return { type: ADD_BOOK, payload: book }
+} */
+
+export function handleAdd(values: NewBookFormValues) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(addBookRequest())
+    const { token } = getState().user.loggedInUser
+    const payload: NewBookJson = {
+      ...values,
+      status: 'AVAILABLE',
+      authors: values.authors.split(',').map((s) => s.trim())
+    }
+
+    const addBookresponse = await books.addBook(payload, token)
+    if (addBookresponse.status == 200) {
+      dispatch(addBookResponse())
+      dispatch(getAllBooks())
+    } else {
+      dispatch(addBookError(addBookresponse.data))
+    }
+  }
 }
 export function handleUpdate(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -190,9 +213,28 @@ export function returnError(payload: object) {
   }
 }
 
+export function addBookRequest() {
+  return {
+    type: ADD_BOOK_REQUEST
+  }
+}
+
+export function addBookResponse() {
+  return {
+    type: ADD_BOOK_RESPONSE
+  }
+}
+export function addBookError(payload: object) {
+  return {
+    type: ADD_BOOK_ERROR,
+    payload
+  }
+}
+
 function jsonBookToBook(book: JsonBook): Book {
   return {
     ...book,
+    authors: book.authors.join(', '),
     publishedDate: book.publishedDate.slice(0, 4),
     borrowDate: book.borrowDate ? new Date(book.borrowDate) : undefined,
     returnByDate: book.returnByDate ? new Date(book.returnByDate) : undefined

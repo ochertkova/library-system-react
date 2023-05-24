@@ -34,10 +34,19 @@ const returnBook = (id: string, token: string) => {
   return axios.post(`${baseUrl}/${id}/return`, {}, config).catch((err) => err.response)
 }
 
+const addBook = (payload: NewBookJson, token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+
+  return axios.post(baseUrl, payload, config).catch((err) => err.response)
+}
+
 export default {
   getAll,
   getById,
   searchBooks,
   borrowBook,
-  returnBook
+  returnBook,
+  addBook
 }

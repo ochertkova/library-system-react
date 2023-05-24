@@ -7,48 +7,59 @@ import { AppDispatch, RootState } from '../../redux/store'
 import { getBookById, handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
 import { useEffect } from 'react'
 
-function getFunctions(userState: UserState, loans: Loan[], book: Book, dispatch: AppDispatch) {
+function getFunctions(
+  userState: UserState,
+  loans: Loan[] | undefined,
+  book: Book,
+  dispatch: AppDispatch
+) {
   const { isAuthenticated, loggedInUser: user } = userState
+
+  if (!isAuthenticated || !user) return () => <></>
+  if (user.role === 'ADMIN') return getAdminFunctions(book, dispatch)
+
+  return getUserFunctions(loans, book, dispatch)
+}
+
+function getAdminFunctions(book: Book, dispatch: AppDispatch) {
   const onClickRemove = () => dispatch(handleRemove(book))
 
-  if (!isAuthenticated || !user || !loans) return () => <></>
+  return () => (
+    <>
+      {book.status === 'BORROWED' && (
+        <>
+          <Box>
+            <>Borrowed: {book?.borrowDate?.toDateString()}</>
+          </Box>
+          <Box>
+            <>Borrower: {book?.borrowerId}</>
+          </Box>
+          <Box>
+            <>Return by date: {book?.returnByDate?.toDateString()}</>
+          </Box>
+        </>
+      )}
+      <Link to={`/updateBook/${book.id}`} style={{ textDecoration: 'none' }}>
+        <Button sx={{ marginTop: 2, marginRight: 2 }} variant="contained">
+          Update Book
+        </Button>
+      </Link>
+      <Link to="/catalog" style={{ textDecoration: 'none' }}>
+        <Button sx={{ marginTop: 2 }} variant="contained" onClick={onClickRemove}>
+          Remove Book
+        </Button>
+      </Link>
+    </>
+  )
+}
+
+function getUserFunctions(loans: Loan[] | undefined, book: Book, dispatch: AppDispatch) {
+  if (!loans) return () => <></>
 
   const myLoan: Loan | undefined = loans.find((loan: Loan) => loan.book.id === book.id)
 
-  if (user?.role === 'ADMIN') {
-    return () => (
-      <>
-        {book.status === 'BORROWED' && (
-          <>
-            <Box>
-              <>Borrowed: {book?.borrowDate?.toDateString()}</>
-            </Box>
-            <Box>
-              <>Borrower: {book?.borrowerId}</>
-            </Box>
-            <Box>
-              <>Return by date: {book?.returnByDate?.toDateString()}</>
-            </Box>
-          </>
-        )}
-        <Link to={`/updateBook/${book.id}`} style={{ textDecoration: 'none' }}>
-          <Button sx={{ marginTop: 2, marginRight: 2 }} variant="contained">
-            Update Book
-          </Button>
-        </Link>
-        <Link to="/catalog" style={{ textDecoration: 'none' }}>
-          <Button sx={{ marginTop: 2 }} variant="contained" onClick={onClickRemove}>
-            Remove Book
-          </Button>
-        </Link>
-      </>
-    )
-  }
   const onClickBorrow = () => dispatch(handleBorrow(book))
   const onClickReturn = () => dispatch(handleReturn(book))
-
-  // const onClickBorrow = () => console.log('borrowing book', book.id)
-  //const onClickReturn = () => console.log('returning book', book.id)
 
   return () => (
     <>
@@ -140,7 +151,7 @@ const BookInfo = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={12}>
-              <Box>{book?.authors.map((author: Author) => author.name)}</Box>
+              <Box>{book?.authors}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
               <Box>ISBN:{book?.isbn}</Box>
