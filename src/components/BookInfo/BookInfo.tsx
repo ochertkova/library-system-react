@@ -43,9 +43,11 @@ function getAdminFunctions(book: Book, dispatch: AppDispatch) {
           Update Book
         </Button>
       </Link>
-      <Button sx={{ marginTop: 2 }} variant="contained" onClick={onClickRemove}>
-        Remove Book
-      </Button>
+      <Link to={'/catalog'} style={{ textDecoration: 'none' }}>
+        <Button sx={{ marginTop: 2 }} variant="contained" onClick={onClickRemove}>
+          Remove Book
+        </Button>
+      </Link>
     </>
   )
 }

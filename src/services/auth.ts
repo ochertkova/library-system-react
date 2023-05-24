@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:8080/api/v1/auth'
+const baseUrl = 'https://ancient-scrubland-05068.herokuapp.com/api/v1/auth'
 
 // const create = (newObject) => {
 //   return axios.post(baseUrl, newObject)
