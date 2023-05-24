@@ -3,14 +3,14 @@ import {
   ADD_BOOK_REQUEST,
   ADD_BOOK_RESPONSE,
   ADD_BOOK_ERROR,
-  BORROW_BOOK,
   FETCH_BOOKS_RESPONSE,
   FETCH_BOOKS_REQUEST,
   FETCH_BOOK_BY_ID_REQUEST,
   FETCH_BOOK_BY_ID_RESPONSE,
   REMOVE_BOOK,
-  RETURN_BOOK,
-  UPDATE_BOOK,
+  UPDATE_BOOK_REQUEST,
+  UPDATE_BOOK_RESPONSE,
+  UPDATE_BOOK_ERROR,
   SEARCH_BOOKS_REQUEST,
   SEARCH_BOOKS_RESPONSE,
   MY_LOANS_REQUEST,
@@ -76,17 +76,20 @@ export default function bookReducer(state: BooksState = initialState, action: Bo
         ...state,
         errorMessage: action.payload.message
       }
-    case UPDATE_BOOK:
-      const updatedBooks = state.books.map((book) => {
-        if (book.id === action.payload.id) {
-          return action.payload
-        }
-        return book
-      })
+    case UPDATE_BOOK_REQUEST:
       return {
         ...state,
-        isLoading: false,
-        books: updatedBooks
+        isLoading: true
+      }
+    case UPDATE_BOOK_RESPONSE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case UPDATE_BOOK_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload.message
       }
     case SEARCH_BOOKS_REQUEST:
       return {

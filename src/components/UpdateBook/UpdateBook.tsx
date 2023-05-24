@@ -1,62 +1,66 @@
-import { Box, TextField, Button, Stack, FormControl } from '@mui/material'
+import { Box, TextField, Button, Stack, FormControl, Typography } from '@mui/material'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { handleUpdate } from '../../redux/actions/book'
+import { getBookById, handleUpdate } from '../../redux/actions/book'
 import { AppDispatch, RootState } from '../../redux/store'
+import { useEffect } from 'react'
 
 const UpdateBook = () => {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
-  const bookId = Number(useParams().id)
-  const { isLoading, books } = useSelector((state: RootState) => state.books)
-
-  const bookForUpdate: Book = books.find((book: Book) => book.id === bookId)
-
+  const { id = '' } = useParams()
+  const { isLoading, activeBook: book } = useSelector((state: RootState) => state.books)
   const formik = useFormik({
     initialValues: {
-      ISBN: bookForUpdate.ISBN,
-      title: bookForUpdate.title,
-      authors: bookForUpdate.authors,
-      publisher: bookForUpdate.publisher,
-      publishedDate: bookForUpdate.publishedDate,
-      description: bookForUpdate.description
+      isbn: book?.isbn,
+      title: book?.title,
+      authors: book?.authors,
+      publisher: book?.publisher,
+      publishedDate: book?.publishedDate,
+      description: book?.description,
+      bookCoverLink: book?.bookCoverLink,
+      category: book?.category
     },
-    onSubmit: (values: Omit<Book, 'id' | 'status'>) => {
-      const valuesWithIdStatus = {
+    onSubmit: (values: UpdateBookFormValues) => {
+      const updateWithStatus: UpdateBookFormValuesWithStatus = {
         ...values,
-        id: bookForUpdate.id,
-        status: bookForUpdate.status,
-        cover: bookForUpdate.bookCoverLink
+        status: book.status // this causes problem if other user is borrowing the book while I update
       }
-
-      navigate(`/bookInfo/${bookForUpdate.id}`)
-      return dispatch(handleUpdate(valuesWithIdStatus))
+      navigate(`/bookInfo/${book.id}`)
+      return dispatch(handleUpdate(book.id, updateWithStatus))
     },
     validationSchema: Yup.object({
-      ISBN: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),
+      isbn: Yup.string().min(6, 'Must be at least 6 characters').required('ISBN is required'),
       title: Yup.string().required('Title is required'),
       authors: Yup.string().required('Authors is required'),
       publisher: Yup.string().required('Publisher is required'),
       publishedDate: Yup.string().required('Published date is required'),
-      description: Yup.string().required('Description is required')
+      description: Yup.string().required('Description is required'),
+      bookCoverLink: Yup.string(),
+      category: Yup.string()
     })
   })
+
   return (
     <Stack spacing={2}>
-      <Box>Edit book</Box>
+      <Box>
+        <Typography variant="h5" sx={{ textAlign: 'center' }}>
+          Edit book
+        </Typography>
+      </Box>
       <Box padding={3} component="form" onSubmit={formik.handleSubmit}>
         <Stack spacing={2} sx={{ width: 0.75 }}>
           <FormControl>
             <TextField
-              id="ISBN"
+              id="isbn"
               label="ISBN"
               variant="outlined"
-              {...formik.getFieldProps('ISBN')}
-              error={Boolean(formik.errors.ISBN && formik.touched.ISBN)}
-              helperText={formik.touched.ISBN && formik.errors.ISBN}
+              {...formik.getFieldProps('isbn')}
+              error={Boolean(formik.errors.isbn && formik.touched.isbn)}
+              helperText={formik.touched.isbn && formik.errors.isbn}
             />
           </FormControl>
           <FormControl>
@@ -105,6 +109,26 @@ const UpdateBook = () => {
               label="Description"
               variant="outlined"
               {...formik.getFieldProps('description')}
+              error={Boolean(formik.errors.description && formik.touched.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              id="bookCoverLink"
+              label="Book cover link"
+              variant="outlined"
+              {...formik.getFieldProps('bookCoverLink')}
+              error={Boolean(formik.errors.description && formik.touched.description)}
+              helperText={formik.touched.description && formik.errors.description}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              id="category"
+              label="Category"
+              variant="outlined"
+              {...formik.getFieldProps('category')}
               error={Boolean(formik.errors.description && formik.touched.description)}
               helperText={formik.touched.description && formik.errors.description}
             />

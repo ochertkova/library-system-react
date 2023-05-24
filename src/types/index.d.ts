@@ -74,6 +74,7 @@ type JsonBook = {
 }
 
 type NewBookJson = Omit<JsonBook, 'id'>
+type UpdatedBookJson = Omit<JsonBook, 'id'>
 
 type NewBookFormValues = {
   bookCoverLink: string
@@ -85,6 +86,23 @@ type NewBookFormValues = {
   publishedDate: string
   category: string
 }
+
+type UpdateBookFormValues = {
+  bookCoverLink: string
+  isbn: string
+  title: string
+  description: string
+  publisher: string
+  authors: string
+  publishedDate: string
+  category: string
+}
+
+type Status = {
+  status: staring
+}
+
+type UpdateBookFormValuesWithStatus = UpdateBookFormValues & Status
 
 type Author = {
   id: string

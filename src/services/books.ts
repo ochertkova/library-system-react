@@ -5,14 +5,6 @@ const getAll = () => {
   return axios.get(baseUrl)
 }
 
-// const create = (newObject) => {
-//   return axios.post(baseUrl, newObject)
-// }
-
-// const update = (id, newObject) => {
-//   return axios.put(`${baseUrl}/${id}`, newObject)
-// }
-
 const getById = (id: string) => {
   return axios.get(`${baseUrl}/${id}`)
 }
@@ -38,8 +30,14 @@ const addBook = (payload: NewBookJson, token: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   }
-
   return axios.post(baseUrl, payload, config).catch((err) => err.response)
+}
+
+const updateBook = (id: string, payload: UpdatedBookJson, token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+  return axios.put(`${baseUrl}/${id}`, payload, config).catch((err) => err.response)
 }
 
 export default {
@@ -48,5 +46,6 @@ export default {
   searchBooks,
   borrowBook,
   returnBook,
-  addBook
+  addBook,
+  updateBook
 }

@@ -11,7 +11,9 @@ export const RETURN_ERROR = 'RETURN_ERROR'
 export const ADD_BOOK_REQUEST = 'ADD_BOOK_REQUEST'
 export const ADD_BOOK_RESPONSE = 'ADD_BOOK_RESPONSE'
 export const ADD_BOOK_ERROR = 'ADD_BOOK_ERROR'
-export const UPDATE_BOOK = 'UPDATE_BOOK'
+export const UPDATE_BOOK_REQUEST = 'UPDATE_BOOK_REQUEST'
+export const UPDATE_BOOK_RESPONSE = 'UPDATE_BOOK_RESPONSE'
+export const UPDATE_BOOK_ERROR = 'UPDATE_BOOK_ERROR'
 export const REMOVE_BOOK = 'REMOVE_BOOK'
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST'
 export const FETCH_BOOKS_RESPONSE = 'FETCH_BOOKS_RESPONSE'
@@ -47,17 +49,6 @@ export function handleReturn(book: Book) {
     }
   }
 }
-/*
-export function handleAdd(book: Omit<Book, 'id' | 'status'>) {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const books = getState().books.books
-    const id = books.slice(-1)[0].id + 1
-    return dispatch(handleAddComplete({ ...book, id, status: 'AVAILABLE' }))
-  }
-}
-export function handleAddComplete(book: Book) {
-  return { type: ADD_BOOK, payload: book }
-} */
 
 export function handleAdd(values: NewBookFormValues) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -68,7 +59,6 @@ export function handleAdd(values: NewBookFormValues) {
       status: 'AVAILABLE',
       authors: values.authors.split(',').map((s) => s.trim())
     }
-
     const addBookresponse = await books.addBook(payload, token)
     if (addBookresponse.status == 200) {
       dispatch(addBookResponse())
@@ -78,6 +68,7 @@ export function handleAdd(values: NewBookFormValues) {
     }
   }
 }
+/*
 export function handleUpdate(book: Book) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     return dispatch(handleUpdateComplete(book))
@@ -87,6 +78,25 @@ export function handleUpdateComplete(book: Book) {
   return {
     type: UPDATE_BOOK,
     payload: book
+  }
+}*/
+
+export function handleUpdate(id: string, values: UpdateBookFormValuesWithStatus) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(updateBookRequest())
+    const { token } = getState().user.loggedInUser
+    const payload: UpdatedBookJson = {
+      ...values,
+      authors: values.authors.split(',').map((s) => s.trim())
+    }
+    const updateBookresponse = await books.updateBook(id, payload, token)
+    if (updateBookresponse.status == 200) {
+      dispatch(updateBookResponse())
+      dispatch(getBookById(id))
+      dispatch(getAllBooks())
+    } else {
+      dispatch(updateBookError(updateBookresponse.data))
+    }
   }
 }
 export function handleRemove(book: Book) {
@@ -227,6 +237,24 @@ export function addBookResponse() {
 export function addBookError(payload: object) {
   return {
     type: ADD_BOOK_ERROR,
+    payload
+  }
+}
+
+export function updateBookRequest() {
+  return {
+    type: UPDATE_BOOK_REQUEST
+  }
+}
+
+export function updateBookResponse() {
+  return {
+    type: UPDATE_BOOK_RESPONSE
+  }
+}
+export function updateBookError(payload: object) {
+  return {
+    type: UPDATE_BOOK_ERROR,
     payload
   }
 }

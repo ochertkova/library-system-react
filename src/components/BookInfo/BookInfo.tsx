@@ -1,11 +1,10 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import BookIcon from '@mui/icons-material/Book'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { AppDispatch, RootState } from '../../redux/store'
-import { getBookById, handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
-import { useEffect } from 'react'
+import { handleBorrow, handleRemove, handleReturn } from '../../redux/actions/book'
 
 function getFunctions(
   userState: UserState,
@@ -89,21 +88,8 @@ function getUserFunctions(loans: Loan[] | undefined, book: Book, dispatch: AppDi
 
 const BookInfo = () => {
   const userState = useSelector((state: RootState) => state.user)
-  const { id = '' } = useParams()
-  const { isLoading, activeBook: book, loans } = useSelector((state: RootState) => state.books)
+  const { activeBook: book, loans } = useSelector((state: RootState) => state.books)
   const dispatch: AppDispatch = useDispatch()
-
-  useEffect(() => {
-    if (!book) {
-      dispatch(getBookById(id))
-    }
-  }, [book])
-
-  if (isLoading || !book) {
-    return <Typography>Loading book...</Typography>
-  }
-
-  console.log('Rendering book info')
 
   let cover = <BookIcon sx={{ fontSize: '80px', color: 'grey' }} />
   if (book.bookCoverLink) {
@@ -157,12 +143,17 @@ const BookInfo = () => {
               <Box>ISBN:{book?.isbn}</Box>
             </Grid>
             <Grid item xs={12} md={12}>
+              <Box>{book?.description}</Box>
+            </Grid>
+            <Grid item xs={12} md={12}>
               <Box>
                 <>{`Publisher: ${book?.publisher}, ${book?.publishedDate}`}</>
               </Box>
             </Grid>
             <Grid item xs={12} md={12}>
-              <Box>{book?.description}</Box>
+              <Box>
+                <>{`Category: ${book?.category}`}</>
+              </Box>
             </Grid>
             <Grid item xs={12} md={12}>
               <Box>Status: {book?.status}</Box>
