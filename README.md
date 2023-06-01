@@ -1,6 +1,6 @@
 # Front-end for Library System
 
-This is a simple App which I developed as a Front-end assignment for Integrify Full Stack program. In the project I use mock data stored locally.
+This is a simple App which I developed as a Front-end assignment for Integrify Full Stack program.
 
 The App is deployed at:
 https://library-system.herokuapp.com/
